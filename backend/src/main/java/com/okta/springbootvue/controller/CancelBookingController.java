@@ -33,8 +33,7 @@ public class CancelBookingController {
     private UserRegisterRepository userRegisterRepository;
     @Autowired
     private BookingRepository bookingRepository;
-    @Autowired
-    private QuestionRepository questionRepository;
+   
 
 
     CancelBookingController(CancelBookingRepository cancelBookingRepository) {
@@ -49,15 +48,16 @@ public class CancelBookingController {
     @PostMapping("/cancelbooking/{book_id}/{reason_id}")
     public CancelBooking newCancelBooking(CancelBooking newCancelBooking,
     @PathVariable long reason_id,
+    @PathVariable long userRegister_id,
     @PathVariable long book_id) {
-    //UserRegister userregister  = userRegisterRepository.findById(userRegister_id);
+    UserRegister userregister  = userRegisterRepository.findById(userRegister_id);
     CancelReason cancelreason = cancelReasonRepository.findById(reason_id);
     Booking booking = bookingRepository.findById(book_id);
     LocalDateTime now = LocalDateTime.now();
    
 
     
-    //newCancelBooking.setUser(userregister);
+    newCancelBooking.setUser(userregister);
     newCancelBooking.setBooking(booking);
     newCancelBooking.setReason(cancelreason);
     newCancelBooking.setDate(now);
