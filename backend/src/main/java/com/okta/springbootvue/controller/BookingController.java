@@ -22,7 +22,7 @@ public class BookingController {
     @Autowired
     private final BookingRepository bookingRepository;
     @Autowired
-    private UserRepository userRepository;
+    private UserRegisterRepository userRepository;
     @Autowired
     private SeatRepository seatRepository;
     @Autowired
@@ -48,7 +48,7 @@ public class BookingController {
     public Booking newBooking(Booking newBooking, @PathVariable long user_id, @PathVariable long showtime_id,
             @PathVariable long seat_id) {
 
-        User chooseUser = userRepository.findById(user_id);
+        UserRegister chooseUser = userRepository.findById(user_id);
         Showtime chooseShowtime = showtimeRepository.findById(showtime_id);
         Seat chooseSeat = seatRepository.findById(seat_id);
         LocalDateTime booking_time = LocalDateTime.now();
