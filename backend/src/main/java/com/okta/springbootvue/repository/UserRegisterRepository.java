@@ -10,6 +10,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public
 interface UserRegisterRepository extends JpaRepository<UserRegister, Long> {
     
-
+    UserRegister findById(long id);
 
 }
