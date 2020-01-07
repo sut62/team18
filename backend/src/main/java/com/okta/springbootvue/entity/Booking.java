@@ -24,9 +24,9 @@ public class Booking {
     private @NonNull String booking_time;
 
     // *-1 with user
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserRegister.class)
     @JoinColumn(name = "USER_ID", insertable = true)
-    private User chooseUser;
+    private UserRegister chooseUser;
 
     // *-1 with showtime
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Showtime.class)
@@ -38,7 +38,7 @@ public class Booking {
     @JoinColumn(name = "SEAT_ID", insertable = true)
     private Seat chooseSeat;
 
-    public void setChooseUser(User user) {
+    public void setChooseUser(UserRegister user) {
         chooseUser = user;
     }
 
