@@ -24,9 +24,9 @@ public class Sex {
     private @NonNull Long id;
     private @NonNull String sex;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    //@OneToMany(fetch = FetchType.EAGER)
     
-    private Collection<UserRegister> userregister;
+    //private Collection<UserRegister> userregister;
 
     public void setName(String name) {
 		this.sex = name;
