@@ -1,7 +1,7 @@
 package com.okta.springbootvue.controller;
 
 import com.okta.springbootvue.entity.Ratingshow;
-import package com.okta.springbootvue.repository.RatingshowRepository;
+import com.okta.springbootvue.repository.RatingshowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

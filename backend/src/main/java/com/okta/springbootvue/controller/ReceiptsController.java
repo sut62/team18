@@ -1,24 +1,19 @@
-﻿package com.okta.springbootvue.controller;
-
+package com.okta.springbootvue.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Collection;
 import java.util.stream.Collectors;
-
 import com.okta.springbootvue.entity.Receipts;
 import com.okta.springbootvue.entity.Payment;
 import com.okta.springbootvue.entity.Employee;
 import com.okta.springbootvue.entity.Booking;
-
 import com.okta.springbootvue.repository.ReceiptsRepository;
 import com.okta.springbootvue.repository.PaymentRepository;
 import com.okta.springbootvue.repository.EmployeeRepository;
 import com.okta.springbootvue.repository.BookingRepository;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "http://localhost:8080")

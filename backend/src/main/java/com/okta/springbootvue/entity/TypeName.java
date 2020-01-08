@@ -29,8 +29,8 @@ public class TypeName {
 	private @NonNull Long id;
 	private @NonNull String type_name;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-    private Collection<UserRegister> userregister;
+	//@OneToMany(fetch = FetchType.EAGER)
+    //private Collection<UserRegister> userregister;
 
 	public void setName(String name) {
 		this.type_name = name;

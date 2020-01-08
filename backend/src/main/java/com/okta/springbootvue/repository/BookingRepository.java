@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RepositoryRestResource
 public
 interface BookingRepository extends JpaRepository<Booking, Long> {
+    Booking findById(long id);
     
     //change booked seat status 
     @Transactional

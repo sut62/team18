@@ -29,9 +29,9 @@ public class Ratingshow {
 
     private @NonNull String rate;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    //@OneToMany(fetch = FetchType.EAGER)
     //mappedBy  = "type"
-    private Collection<Show> show;
+   // private Collection<Show> show;
 
     public void setName(String name) {
 		this.rate = name;
