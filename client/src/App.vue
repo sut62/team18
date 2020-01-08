@@ -1,34 +1,49 @@
-<template>
-  <v-app>
-    <v-app-bar app class="blue darken-3"
-      >
-      <v-toolbar-title class="headline text-uppercase">
-        
-        <span class="font-weight-light white--text"> ระบบจองตั๋วการแสดง</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Username : {{username}}</span>
-      </v-btn>
-    </v-app-bar>
+<template >
 
-    <v-content class="blue lighten-3">
+  <v-app >
+    <div>
+<v-app-bar app class ="blue darken-3" >
+    
+      <v-toolbar-title v-if="this.ids != null" class="headline text-uppercase">
+        
+        <span class="font-weight-light"> ระบบลงการแสดง</span>
+        &nbsp;
+        <span>{{this.ids}}</span>
+          
+         <v-btn text href="/booking/" target="_self">Booking</v-btn>
+          <v-btn text href="/register" target="_self">Register</v-btn>
+           <v-btn text href="/drop" target="_self">DropEnroll</v-btn>
+            <v-btn text href="/change" target="_self">ChangeGroup</v-btn>
+            <v-btn @click="logOut" text target="_self">LOGOUT</v-btn>
+        </v-toolbar-title>
+        
+   </v-app-bar>
+    </div>
+<v-content class="blue lighten-3">
      
       <router-view />
     </v-content>
   </v-app>
+  
 </template>
 
 <script>
-
 export default {
   name: 'App',
-  data: () => ({
-    username: '',
-  }),
-};
+  data(){
+    return{
+      valid:false,
+    check: false,
+    ids: localStorage.getItem("siteUser")
+    };
+  },
+  methods:{
+    logOut(){
+      localStorage.removeItem("siteId");
+      localStorage.removeItem("siteUser");
+      this.ids=null;
+      this.$router.push("/");
+},
+  }
+   };
 </script>
