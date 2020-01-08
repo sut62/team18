@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-//import java.sql.Date;
 import java.util.stream.Collectors;
 
 import com.okta.springbootvue.entity.Show;
@@ -20,7 +19,7 @@ import com.okta.springbootvue.repository.RatingshowRepository;
 import com.okta.springbootvue.repository.ShowtypeRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class ShowController {
     @Autowired
