@@ -29,8 +29,8 @@ public class Payment {
 
     private @NonNull String type;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Receipts> receipts;
+    //@OneToMany(fetch = FetchType.EAGER)
+    //private Collection<Receipts> receipts;
 
 	public void setName(String name) {
         this.type = name;
