@@ -10,6 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public
 interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
+    Showtime findById(long id);
     @Query( value = "SELECT * FROM Showtime z WHERE z.SHOW_ID = :show_id and z.TIME_ID = :time_id and z.SHOWLOCATION_ID = :location_id and SHOW_DATE =:showdate",
     
     nativeQuery = true)
