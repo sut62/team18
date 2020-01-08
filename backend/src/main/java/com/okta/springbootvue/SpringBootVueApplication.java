@@ -24,6 +24,7 @@ public class SpringBootVueApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootVueApplication.class, args);
 	}
+	/*
 	@Bean
 	ApplicationRunner init(ShowRepository showRepository, TimeRepository timeRepository, ShowLocationRepository showLocationRepository, ZoneRepository zoneRepository, SeatRepository seatRepository) {
 		return args -> {
@@ -45,7 +46,7 @@ public class SpringBootVueApplication {
 				showLocationRepository.save(location); 
 			});
 
-			/* zone */
+			// zone 
 
 			//zone C
 			Zone zoneC = new Zone();
@@ -65,7 +66,7 @@ public class SpringBootVueApplication {
 			zoneE.setPrice(3500);
 			zoneRepository.save(zoneE);
 
-			/* seat */
+			// seat 
 
 			//zone C
 			Seat C1 = new Seat();
@@ -131,6 +132,6 @@ public class SpringBootVueApplication {
 			seatRepository.findAll().forEach(System.out::println);
 			
 		};
-	}
+	}*/
 	
 }
