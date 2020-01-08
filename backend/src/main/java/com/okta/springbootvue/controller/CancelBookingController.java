@@ -48,8 +48,8 @@ public class CancelBookingController {
     @PostMapping("/cancelbooking/{book_id}/{reason_id}")
     public CancelBooking newCancelBooking(CancelBooking newCancelBooking,
     @PathVariable long reason_id,
-    @PathVariable long userRegister_id,
-    @PathVariable long book_id) {
+    @PathVariable long book_id,
+    @PathVariable long userRegister_id) {
     UserRegister userregister  = userRegisterRepository.findById(userRegister_id);
     CancelReason cancelreason = cancelReasonRepository.findById(reason_id);
     Booking booking = bookingRepository.findById(book_id);
