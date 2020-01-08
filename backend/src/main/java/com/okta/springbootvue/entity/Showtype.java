@@ -30,9 +30,9 @@ public class Showtype {
 
 	private @NonNull String shname;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	//@OneToMany(fetch = FetchType.EAGER)
 	// mappedBy  = "rentCustomer"
-	private Collection<Show> show;
+	//private Collection<Show> show;
 
 	public void setName(String name) {
 		this.shname = name;
