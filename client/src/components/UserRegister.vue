@@ -185,16 +185,6 @@
         </v-btn>
       </v-card-actions>
       </v-row>
-
-        <p>{{this.name}}</p>
-    <p>{{this.userregister.nametypeId}}</p>
-    <p>{{this.userregister.questionId}}</p>
-    <p>{{this.email}}</p>
-    <p>{{this.tel}}</p>
-    <p>{{this.password}}</p>
-    <p>{{this.userregister.sexId}}</p>
-    <p>{{this.student_email}}</p>
-     <p>{{this.answer}}</p>
     
         </v-form>
     </v-card>
@@ -303,20 +293,21 @@ export default {
         )
         .then(response => {
           console.log(response);
-            this.$router.push("/view");
+            alert('บันทึกสำเร็จ')
+            this.$router.push("/");
+
         })
         .catch(e => {
           console.log(e);
+          alert('กรุณาใส่ข้อมูลให้ครบถ้วน')
         });
       this.submitted = true;
     }
     
   },
+  
     clear() {
       this.$refs.form.reset();
-            
-
-        
     },
     refreshList() {
       this.getTypeName();
