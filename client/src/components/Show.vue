@@ -1,0 +1,186 @@
+<template>
+  <v-content>
+      <v-card-text
+      headline
+      align= "center"
+      class="display-3 font--weight-bold blue darken-3 yellow--text text--lighten-1">Show Management</v-card-text>
+    <v-container>
+    <v-row>
+    <v-col cols="18">
+    <v-form>
+            <v-row justify="center" style = "height: 70px;">
+            <!-- ชื่อพนักงาน -->
+              <v-col cols="3">
+                <v-select
+                  label="เลือกชื่อพนักงาน"
+                  solo
+                  v-model="show.employeeId"
+                  :items="employees"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                  prepend-icon="mdi-account"
+                ></v-select>
+              </v-col>
+            </v-row>
+
+          <v-row justify="center" style = "height: 70px;">
+            <!-- กรอกชื่อการแสดง -->
+            <v-col cols="3">
+              <v-text-field
+                solo
+                label="กรอกชื่อการแสดง"
+                v-model="title"
+                :rules="[(v) => !!v || 'This field is required']"
+                required
+                prepend-icon="mdi-lead-pencil"
+              ></v-text-field>
+            </v-col>    
+          </v-row>
+
+          <v-row justify="center" style = "height: 70px;">
+            <!-- ประเภทการแสดง -->
+              <v-col cols="3">
+                <v-select
+                  label="ประเภทการแสดง"
+                  solo
+                  v-model="show.showtypeId"
+                  :items="showtypes"
+                  item-text="shname"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                  prepend-icon="mdi-play-circle"
+                ></v-select>
+              </v-col>
+            </v-row>
+
+            <v-row justify="center" style = "height: 70px;">
+            <!-- เรทการแสดง -->
+              <v-col cols="3">
+                <v-select
+                  label="เรทการแสดง"
+                  solo
+                  v-model="show.ratingshowId"
+                  :items="ratingshows"
+                  item-text="rate"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                  prepend-icon="mdi-account-plus"
+                ></v-select>
+              </v-col>
+            </v-row>
+
+
+          <v-row justify="center" style = "height: 45px;">
+            <v-col cols="12">
+              <v-btn color="red" style="margin-left: 45%;" @click="saveData">save</v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
+      </v-col>
+    </v-row>
+    <v-container>
+  
+    
+ 
+  </v-content>
+</template>
+
+<script>
+import http from "../http-common";
+
+export default {
+  name: "show",
+  data() {
+    return {
+      show: {
+        employeeId: "",
+        ratingshowId: "",
+        showtypeId: "",
+      },
+        title : "",
+        employees : "",
+        ratingshows : "",
+        showtypes : "",
+    };
+  },
+
+  methods: {
+    // ดึงข้อมูล Employee ใส่ combobox
+    getEmployees() {
+      http
+        .get("/employee")
+        .then(response => {
+          this.employees = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    // ดึงข้อมูล Ratingshow ใส่ combobox
+    getRatingshows() {
+      http
+        .get("/ratingshow")
+        .then(response => {
+          this.ratingshows = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    // ดึงข้อมูล Showtype ใส่ combobox
+    getShowtypes() {
+      http
+        .get("/showtype")
+        .then(response => {
+          this.showtypes = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+  
+  
+    // function เมื่อกดปุ่ม save
+    saveData() {
+      http
+        .post(
+          "/show/" +
+            
+            this.show.employeeId +
+            "/" +
+            this.show.ratingshowId +
+            "/" +
+            this.show.showtypeId +
+             "/" +
+            this.title,
+           
+            this.show
+        )
+        .then(response => {
+          console.log(response);
+          alert("บันทึกข้อมูลสำเร็จ");  
+        })
+    .catch(e => {
+          console.log(e);
+          alert("บันทึกข้อมูลไม่สำเร็จ");
+        });
+    },
+    },
+    
+  
+    mounted() {
+     
+      this.getEmployees();
+      this.getRatingshows();
+      this.getShowtypes();
+  }
+};
+</script>
