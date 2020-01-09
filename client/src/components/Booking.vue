@@ -346,6 +346,7 @@ export default {
               type: "error"
             }).then(r => {
               console.log(r.value);
+              this.getConfirm = false;
             });
           } else {
             this.saveBooking();
