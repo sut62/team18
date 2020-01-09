@@ -1,0 +1,170 @@
+<template>
+  <v-content>
+      <v-card-text
+      headline
+      align= "center"
+      class="display-3 font--weight-bold blue darken-3 yellow--text text--lighten-1">RECEIPTS</v-card-text>
+
+    <v-row>
+    <v-col cols="18">
+    <v-form>
+      
+            <v-row justify="center" style = "height: 70px;">
+            <!-- ชื่อพนักงาน -->
+              <v-col cols="3">
+                <v-select
+                  label="เลือกชื่อพนักงาน"
+                  solo
+                  v-model="receipts.employeeId"
+                  :items="employees"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+              </v-col>
+            </v-row>
+
+          <v-row justify="center" style = "height: 70px;">
+            <!-- ชื่อลูกค้า -->
+              <v-col cols="3">
+                <v-select
+                  label="เลือกชื่อลูกค้า"
+                  solo
+                  v-model="receipts.bookingId"
+                  :items="bookings"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+              </v-col>
+            </v-row>
+
+          <v-row justify="center" style = "height: 70px;">
+            <!-- เลือกตั๋วการแสดง -->
+              <v-col cols="3">
+                <v-select
+                  label="เลือกตั๋วการแสดง"
+                  solo
+                  v-model="receipts.bookingId"
+                  :items="bookings"
+                  item-text="title"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+              </v-col>
+            </v-row>
+
+          <v-row justify="center" style = "height: 70px;">
+            <!-- เลือกประเภทการชำระเงิน -->
+              <v-col cols="3">
+                <v-select
+                  label="เลือกประเภทการชำระเงิน"
+                  solo
+                  v-model="receipts.paymentId"
+                  :items="payments"
+                  item-text="type"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'This field is required']"
+                  required
+                ></v-select>
+              </v-col>
+            </v-row>
+
+          <v-row justify="center" style = "height: 45px;">
+            <v-col cols="12">
+              <v-btn color="red" style="margin-left: 45%;" @click="saveData">save</v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-content>
+</template>
+
+<script>
+import http from "../http-common";
+
+export default {
+  name: "receipts",
+  data() {
+    return {
+      receipts: {
+        bookingId: "",
+        employeeId: "",
+        paymentId: ""
+      },
+      employees: "",
+      bookings: "",
+      payments: "",
+    };
+  },
+  methods: {
+
+    getEmployees() {
+      http
+        .get("/employee")
+        .then(response => {
+          this.employees = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    getPayments() {
+      http
+        .get("/payment")
+        .then(response => {
+          this.payments = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    getBookings() {
+      http
+        .get("/booking")
+        .then(response => {
+          this.bookings = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    saveData() {
+
+      http
+        .post(
+          "/receipts/" +
+            this.receipts.bookingId +
+            "/" +
+            this.receipts.employeeId +
+            "/" +
+            this.receipts.paymentId,
+          this.receipts
+        )
+        .then(response => {
+          console.log(response);
+          alert("บันทึกข้อมูลสำเร็จ");
+        })
+        .catch(e => {
+          console.log(e);
+          alert("บันทึกข้อมูลไม่สำเร็จ");
+        });
+    },
+  },
+  mounted() {
+    this.getBookings();
+    this.getEmployees();
+    this.getPayments();
+  }
+};
+</script>
