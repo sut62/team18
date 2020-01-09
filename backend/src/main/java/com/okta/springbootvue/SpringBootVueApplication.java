@@ -7,16 +7,10 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.stream.Stream;
 
-import com.okta.springbootvue.entity.Seat;
-import com.okta.springbootvue.entity.Zone;
-import com.okta.springbootvue.entity.Show;
-import com.okta.springbootvue.entity.ShowLocation;
-import com.okta.springbootvue.entity.Time;
-import com.okta.springbootvue.repository.SeatRepository;
-import com.okta.springbootvue.repository.ZoneRepository;
-import com.okta.springbootvue.repository.ShowLocationRepository;
-import com.okta.springbootvue.repository.ShowRepository;
-import com.okta.springbootvue.repository.TimeRepository;
+
+
+import com.okta.springbootvue.entity.*;
+import com.okta.springbootvue.repository.*;
 
 @SpringBootApplication
 public class SpringBootVueApplication {
@@ -24,10 +18,43 @@ public class SpringBootVueApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootVueApplication.class, args);
 	}
-	/*
+	
 	@Bean
-	ApplicationRunner init(ShowRepository showRepository, TimeRepository timeRepository, ShowLocationRepository showLocationRepository, ZoneRepository zoneRepository, SeatRepository seatRepository) {
+	ApplicationRunner init(CancelReasonRepository cancelReasonRepository,
+	SexRepository sexRepository,TypeNameRepository typeNameRepository  ,  QuestionRepository questionRepository,
+		ShowRepository showRepository, TimeRepository timeRepository, ShowLocationRepository showLocationRepository, ZoneRepository zoneRepository, SeatRepository seatRepository) {
 		return args -> {
+
+			//cancelReason
+			Stream.of("ติดธุระ", "โดนสปอยล์", "ป่วย", "ไม่มีคู่ไปดู").forEach(name -> {
+				CancelReason cReason = new CancelReason();
+				cReason.setReason(name); 
+				cancelReasonRepository.save(cReason); 
+			});
+
+			//----------------------------------------------------------------------
+			Stream.of("ชาย", "หญิง", "ไม่ระบุ").forEach(name -> {
+				Sex sex = new Sex();
+				sex.setName(name); 
+				sexRepository.save(sex); 
+			});
+
+			Stream.of("นาย", "นางสาว", "นาง").forEach(name -> {
+				TypeName typename = new TypeName(); 
+				typename.setName(name);
+				typeNameRepository.save(typename); 
+			});
+
+			Stream.of("บ้านเกิดคุณอยู่ที่ไหน", "สัตว์เลี้ยงของคุณชื่ออะไร", "นักร้องที่คุณชื่นชอบ" ,"สถานที่ที่คุณชื่นชอบ").forEach(name -> {
+				Question question = new Question(); 
+				question.setName(name); 
+				questionRepository.save(question); 
+			});
+
+
+
+
+			//---------------------------------------------------------
 			Stream.of("IU Concert", "Dancing Bug", "Somchai voice", "Opala").forEach(name -> {
 				Show show = new Show(); 
 				show.setTitle(name); 
@@ -132,6 +159,6 @@ public class SpringBootVueApplication {
 			seatRepository.findAll().forEach(System.out::println);
 			
 		};
-	}*/
+	}
 	
 }

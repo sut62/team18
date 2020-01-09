@@ -45,7 +45,7 @@ public class CancelBookingController {
         return cancelBookingRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/cancelbooking/{book_id}/{reason_id}")
+    @PostMapping("/cancelbooking/{book_id}/{reason_id}/{userRegister_id}")
     public CancelBooking newCancelBooking(CancelBooking newCancelBooking,
     @PathVariable long reason_id,
     @PathVariable long book_id,
