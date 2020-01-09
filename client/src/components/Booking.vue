@@ -9,7 +9,7 @@
       <v-layout text-center wrap>
         <v-flex mb-4>
           <v-col></v-col>
-
+ 
           <!-- show -->
           <v-form v-model="validshow" ref="form">
             <v-row justify="center">
@@ -43,6 +43,7 @@
             <v-card color="grey lighten-3">
               <v-card-title>
                 {{showname}}
+                {{this.showDateString}}
                 <v-col align="right">
                   <v-btn
                     outlined
@@ -81,11 +82,11 @@
                     <v-select
                       label="รอบการแสดง"
                       solo
-                      v-model="booking.showtimeId"
+                      v-model="booking.timeId"
                       :items="showtimesDate"
                       item-text="time.time"
                       item-value="id"
-                      hide-selected
+                      
                       :rules="[(v) => !!v || '*กรุณาเลือกรอบการแสดง']"
                       required
                     ></v-select>
@@ -175,7 +176,7 @@
                     <br />การแสดง :
                     <span class="indigo--text text--darken-4">{{showname}}</span>
                     <br />รอบการแสดง :
-                    <span class="indigo--text text--darken-4">{{showtime}}</span>
+                    <span class="indigo--text text--darken-4">{{this.booking.timeId}}</span>
                     <br />โซน :
                     <span class="indigo--text text--darken-4">{{zone}}</span>
                     <br />ที่นั่ง :
@@ -222,7 +223,8 @@ export default {
         showId: "",
         showtimeId: "",
         zoneId: "",
-        seatId: ""
+        seatId: "",
+        timeId: ""
       },
       shows: [],
       showtimes: [],
@@ -286,6 +288,7 @@ export default {
         .get("/showtimeD/showtimeid=" + this.booking.showId) /////////////
         .then(response => {
           this.showtimes = response.data;
+          
           console.log(response.data);
         })
         .catch(e => {
@@ -296,10 +299,23 @@ export default {
     },
     showDatetime() {
       http
-        .get("/showtime/showtimeid=" + this.booking.showtimeId)
+        .get("/showtime/showtimeid=" + this.booking.showtimeId)////////////
+        .then(response => {
+          
+          this.showDateString = response.data[0].showDate;
+          console.log(response.data);
+          this.LastTime();
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },LastTime() {
+      http
+        .get("/showDatetime/showid=" + this.showDateString)////////////
         .then(response => {
           this.showtimesDate = response.data;
-          this.showDateString = response.data.showDate;
+          
+          
           console.log(response.data);
         })
         .catch(e => {
@@ -420,7 +436,9 @@ export default {
             "-" +
             this.booking.showtimeId +
             "-" +
-            this.booking.seatId,
+            this.booking.seatId +
+            "-" +
+            this.booking.timeId,
           this.booking
         )
         .then(response => {

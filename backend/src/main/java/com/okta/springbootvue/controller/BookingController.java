@@ -27,6 +27,8 @@ public class BookingController {
     private SeatRepository seatRepository;
     @Autowired
     private ShowtimeRepository showtimeRepository;
+    @Autowired
+    private TimeRepository timeRepository;
 
     BookingController(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
@@ -44,19 +46,21 @@ public class BookingController {
     }
 
     // save booking
-    @PostMapping("/booking/success/{user_id}-{showtime_id}-{seat_id}")
+    @PostMapping("/booking/success/{user_id}-{showtime_id}-{seat_id}-{time_id}")
     public Booking newBooking(Booking newBooking, @PathVariable long user_id, @PathVariable long showtime_id,
-            @PathVariable long seat_id) {
+            @PathVariable long seat_id,@PathVariable long time_id) {
 
         UserRegister chooseUser = userRepository.findById(user_id);
         Showtime chooseShowtime = showtimeRepository.findById(showtime_id);
         Seat chooseSeat = seatRepository.findById(seat_id);
+        Time time = timeRepository.findById(time_id);
         LocalDateTime booking_time = LocalDateTime.now();
 
         newBooking.setChooseUser(chooseUser); // user
         newBooking.setChooseShowtime(chooseShowtime); // showtime
         newBooking.setChooseSeat(chooseSeat); // seat
         newBooking.setBookingTime(booking_time); // set date
+        newBooking.setTime(time);
         bookingRepository.changeSeatStatus(seat_id);
 
         return bookingRepository.save(newBooking); // บันทึก Objcet ชื่อ Booking

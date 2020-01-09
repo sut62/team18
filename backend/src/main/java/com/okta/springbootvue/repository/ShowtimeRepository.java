@@ -14,17 +14,18 @@ public
 interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
     Showtime findById(long id);
 
-    @Query( value = "SELECT distinct SHOW_DATE FROM SHOWTIME s where s.show_id = :sub",
+    @Query( value = "SELECT *  FROM SHOWTIME s where s.show_id = :sub",
             nativeQuery = true)
     Collection<Showtime> findShowtimeByShow(@Param("sub") Long sub);
 
 
-    @Query( value = "SELECT distinct SHOW_DATE FROM SHOWTIME s where s.show_id =: 1 ",
+    @Query( value = "SELECT *  FROM SHOWTIME s where s.showtime_id = :sub",
             nativeQuery = true)
-    Optional<Showtime> ShowdateTime(@Param("sub") Long sub);
+    Collection<Showtime> findShowtime(@Param("sub") Long sub);
 
 
-    @Query( value = "SELECT * FROM SHOWTIME s where s.SHOW_DATE  = :sub",
+
+    @Query( value = "SELECT * FROM SHOWTIME s where s.show_date  = :sub",
             nativeQuery = true)
     Collection<Showtime> findDatetime(@Param("sub") java.util.Date sub);
 

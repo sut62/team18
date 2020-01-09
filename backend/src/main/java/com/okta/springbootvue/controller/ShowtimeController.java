@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import com.okta.springbootvue.entity.Show;
@@ -45,14 +44,15 @@ public class ShowtimeController {
     public Collection<Showtime> getShowtimeByShow(@PathVariable("id") Long id) {
         return showtimeRepository.findShowtimeByShow(id);
     }
+  
+    @GetMapping("/showtime/showtimeid={id}")
+    public Collection<Showtime> findDatetime(@PathVariable("id") Long id) {
+        return showtimeRepository.findShowtime(id);
+    }
     
   
-    @GetMapping("/showtime/showid={id}")
-    public Optional<Showtime> Showtimes_id(@PathVariable Long id) {
-        Optional<Showtime> showtime = showtimeRepository.findById(id);
-        return showtime;
-    }
-  ////////////////
+   
+  
     @GetMapping("/showDatetime/showid={date}")
     public Collection<Showtime> getShowtimeByShow(@PathVariable("date") String date) throws ParseException {
          DateFormat d = new SimpleDateFormat("yyyy-MM-dd");

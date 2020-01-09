@@ -22,6 +22,7 @@ public class Booking {
     private @NonNull Long id;
 
     private @NonNull String booking_time;
+   
 
     // *-1 with user
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserRegister.class)
@@ -37,6 +38,10 @@ public class Booking {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Seat.class)
     @JoinColumn(name = "SEAT_ID", insertable = true)
     private Seat chooseSeat;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Time.class)
+    @JoinColumn(name = "Time_ID", insertable = true)
+    private Time time;
 
     public void setChooseUser(UserRegister user) {
         chooseUser = user;
@@ -55,5 +60,9 @@ public class Booking {
     public void setChooseSeat(Seat chooseSeat) {
         this.chooseSeat = chooseSeat;
     }
+
+	public void setTime(Time time2) {
+        this.time = time2;
+	}
 
 }
