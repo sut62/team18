@@ -12,7 +12,7 @@
         
       >
       <v-row justify="center">
-        <font color="yellow-text lighten-1"><v-card-title>     CancelBooking     </v-card-title> </font>
+        <font color="yellow-text lighten-1"><v-card-title>     CancelBooking    </v-card-title> </font>
       </v-row>
       </v-img>
 <v-form ref="form">
@@ -99,6 +99,7 @@
 
 
 
+
           
  
          
@@ -154,7 +155,7 @@ export default {
         reasons : [],
         bookings : [],
         users:[],
-      
+        a : localStorage.getItem("siteId"),
       
     };
   },
@@ -206,7 +207,7 @@ export default {
   //กดปุ่ม check
     check(){
       http
-        .get("/userregister/id="+siteId)
+        .get("/userregister/id="+this.a)
         .then(response => {
           this.User = response.data;
           console.log(this.User[0].question.id  +"-------"+this.User[0].answer +" xxx "+ this.answer);
@@ -232,7 +233,7 @@ export default {
             "/" +
             this.cancelBooking.reasonId +
             "/"+
-            this.siteId,
+            this.a,
             {}
             
         )
