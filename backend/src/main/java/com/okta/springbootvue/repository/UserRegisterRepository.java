@@ -15,6 +15,12 @@ interface UserRegisterRepository extends JpaRepository<UserRegister, Long> {
     
     UserRegister findById(long id);
 
+
+    @Query( value = "SELECT * FROM USERREGISTER  where question_id = :id",
+            nativeQuery = true)
+    Collection<UserRegister> findQuest(@Param("id") Long id);
+
+
     @Query( value = "SELECT * FROM USERREGISTER u where u.EMAIL = :email and u.Password = :pass",
             nativeQuery = true)
     Collection<UserRegister> checkUser(@Param("email") String email,@Param("pass") String pass);

@@ -50,16 +50,30 @@
                 prepend-icon="mdi-comment-question-outline"
               ></v-text-field>
         </v-col>
+          </v-row>
+        <!-- check -->
+        
+     <v-col justify = "center">
+           <v-row justify="center">
+       <v-btn
+          @click="check()"
+          color="indigo darken-3"
+          text
+        >
+          check
+        </v-btn>
+           </v-row>
+     </v-col>
 
         <!-- Booking -->
-
+        <br>
         <v-col class="d-flex mx-auto" cols="12" sm="10" > 
           <v-select 
          label="เลือกตั๋วการแสดง"
                 solo
                 v-model="cancelBooking.bookingId"
                 :items="bookings "
-                item-text="wayne"
+                item-text="booking_time"
                 item-value="id"
                 :rules="[(v) => !!v || 'กรุณาเลือกตั๋วการแสดง']"
                 required
@@ -85,7 +99,7 @@
 
 
 
-          </v-row>
+          
  
          
       <v-row justify="center" >
@@ -134,11 +148,15 @@ export default {
         bookingId: "",
       },
         valid: false,
+        questionCheck: false,
+        ch: false,
         answer : '',
+        User: [],
         questions : [],
         reasons : [],
         bookings : [],
-
+        users:[],
+      
       
     };
   },
@@ -148,6 +166,7 @@ export default {
    
         // ดึงข้อมูล Question ใส่ combobox
     getQuestion() {
+     
       http
         .get("/question")
         .then(response => {
@@ -186,8 +205,32 @@ export default {
     },
 
 
-  //-------------------------------------------------
-    // function เมื่อกดปุ่ม submit
+  //กดปุ่ม check
+    check(){
+      http
+        .get("/userregister/id="+siteId)
+        .then(response => {
+          this.User = response.data;
+        //  console.log(this.User[0].question.id  +"-----------"+this.User[0].answer +" xxx "+ this.answer);
+           if(this.User[0].question.id == this.cancelBooking.questionId && this.User[0].answer == this.answer){
+             alert(5555555555555555555)
+              this.getReason();
+               this.getBooking();
+       }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+     
+},
+    
+
+
+
+
+
+
+    // function เมื่อกดปุ่ม save
    saveData() {
     {
       http
@@ -195,15 +238,14 @@ export default {
           "/cancelbooking/" +
             this.cancelBooking.bookingId +
             "/" +
-            this.cancelBooking.reasonId ,
+            this.cancelBooking.reasonId +
+            "/"+
+            this.ids,
             {}
             
         )
-
-       /*  .then(response => {
-          console.log(response);
-            this.$router.push("/view");
-        })*/
+   //   alert("บันทึกสำเร็จ")
+      
         .catch(e => {
           console.log(e);
         });
@@ -221,13 +263,15 @@ export default {
       this.getQuestion();
       this.getReason();
       this.getBooking();
+      this.getUser();
     }
     /* eslint-enable no-console */
   },
     mounted() {
       this.getQuestion();
-      this.getReason();
-      this.getBooking();
+     // this.getUser();
+     // this.getReason();
+    //  this.getBooking();
   }
 };
 </script>
