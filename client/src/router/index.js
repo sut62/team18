@@ -5,6 +5,8 @@ import Login from '../components/Login';
 import UserRegister from '../components/UserRegister';
 import Booking from '../components/Booking';
 import CancelBooking from '../components/CancelBooking';
+import Show from '../components/Show';
+import Receipts from '../components/Receipts';
 
 Vue.use(Router);
 
@@ -31,6 +33,14 @@ export default new Router({
     {
         path: '/cancel',
         component: CancelBooking
+    },
+    {
+        path: '/show',
+        component: Show
+    },
+    {
+        path: '/receipt',
+        component: Receipts
     }
     ]
 });

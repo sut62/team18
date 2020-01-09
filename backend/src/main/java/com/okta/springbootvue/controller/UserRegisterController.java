@@ -48,7 +48,10 @@ public class UserRegisterController {
 
 
 
-
+    @GetMapping("/checkUser/{email}/{pass}")
+    public Collection<UserRegister> getCheckSeat(@PathVariable("email") String email, @PathVariable("pass") String pass) {
+        return userregisterRepository.checkUser(email, pass);
+    }
     @GetMapping("/userregister")
     public Collection<UserRegister> UserRegister() {
         return userregisterRepository.findAll().stream().collect(Collectors.toList());
