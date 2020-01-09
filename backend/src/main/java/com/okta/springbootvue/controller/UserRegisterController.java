@@ -45,15 +45,18 @@ public class UserRegisterController {
     UserRegisterController(UserRegisterRepository userregisterRepository) {
         this.userregisterRepository = userregisterRepository;
     }
-
-
+    @GetMapping("/checkUser/{email}/{pass}")
+    public Collection<UserRegister> getCheckUser(@PathVariable("email") String email, @PathVariable("pass") String pass) {
+        return userregisterRepository.checkUser(email, pass);
+    }
+    
 
 
     @GetMapping("/userregister/id={id}")
     public Collection<UserRegister> getuserregister(@PathVariable("id") Long id ) {
         return userregisterRepository.findQuest(id);
     }
-
+    
     @GetMapping("/userregister")
     public Collection<UserRegister> UserRegister() {
         return userregisterRepository.findAll().stream().collect(Collectors.toList());

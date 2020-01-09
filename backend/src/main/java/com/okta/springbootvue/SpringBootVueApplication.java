@@ -68,24 +68,7 @@ public class SpringBootVueApplication {
 				cancelReasonRepository.save(cReason); 
 			});
 
-			//----------------------------------------------------------------------
-			Stream.of("ชาย", "หญิง", "ไม่ระบุ").forEach(name -> {
-				Sex sex = new Sex();
-				sex.setName(name); 
-				sexRepository.save(sex); 
-			});
-
-			Stream.of("นาย", "นางสาว", "นาง").forEach(name -> {
-				TypeName typename = new TypeName(); 
-				typename.setName(name);
-				typeNameRepository.save(typename); 
-			});
-
-			Stream.of("บ้านเกิดคุณอยู่ที่ไหน", "สัตว์เลี้ยงของคุณชื่ออะไร", "นักร้องที่คุณชื่นชอบ" ,"สถานที่ที่คุณชื่นชอบ").forEach(name -> {
-				Question question = new Question(); 
-				question.setName(name); 
-				questionRepository.save(question); 
-			});
+			//-------------------------------------------------------------------
 
 
 			Stream.of("10.00-12.00", "13.00-16.00", "9.00-11.00", "17.00-19.00").forEach(name -> {
