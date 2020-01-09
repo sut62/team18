@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "http://localhost:8082")
 @RestController
 public class EmployeeController {
-
+    
     @Autowired
     private final EmployeeRepository employeeRepository;
 
     public EmployeeController(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
+    }
+    @GetMapping("/checkAdmin/{username}/{pass}")
+    public Collection<Employee> getCheckSeat(@PathVariable("username") String username, @PathVariable("pass") String pass) {
+        return employeeRepository.checkAdmin(username, pass);
     }
 
     @GetMapping("/employee")
