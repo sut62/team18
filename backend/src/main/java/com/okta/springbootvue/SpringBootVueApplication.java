@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.TimeZone;
 import java.util.stream.Stream;
 
-<<<<<<< HEAD
+
 import javax.annotation.PostConstruct;
 
 import com.okta.springbootvue.entity.Employee;
@@ -35,12 +35,12 @@ import com.okta.springbootvue.repository.ShowRepository;
 import com.okta.springbootvue.repository.ShowtypeRepository;
 import com.okta.springbootvue.repository.TimeRepository;
 import com.okta.springbootvue.repository.TypeNameRepository;
-=======
+
 
 
 import com.okta.springbootvue.entity.*;
 import com.okta.springbootvue.repository.*;
->>>>>>> fc74f8e539440efa1c321331d78cfc743e0bd9b2
+
 
 @SpringBootApplication
 public class SpringBootVueApplication {
@@ -50,18 +50,16 @@ public class SpringBootVueApplication {
 	}
 	
 	@Bean
-<<<<<<< HEAD
+
 	ApplicationRunner init(TimeRepository timeRepository, ShowLocationRepository showLocationRepository, 
 	ZoneRepository zoneRepository, SeatRepository seatRepository ,PaymentRepository paymentRepository,
 	SexRepository sexRepository,TypeNameRepository typeNameRepository  ,  QuestionRepository questionRepository,
-	 RatingshowRepository ratingshowRepository, ShowtypeRepository showtypeRepository,EmployeeRepository employeeRepository) {
+	 RatingshowRepository ratingshowRepository, ShowtypeRepository showtypeRepository,EmployeeRepository employeeRepository,
+	 CancelReasonRepository cancelReasonRepository) {
 		return args -> {
 			
-=======
-	ApplicationRunner init(CancelReasonRepository cancelReasonRepository,
-	SexRepository sexRepository,TypeNameRepository typeNameRepository  ,  QuestionRepository questionRepository,
-		ShowRepository showRepository, TimeRepository timeRepository, ShowLocationRepository showLocationRepository, ZoneRepository zoneRepository, SeatRepository seatRepository) {
-		return args -> {
+
+	
 
 			//cancelReason
 			Stream.of("ติดธุระ", "โดนสปอยล์", "ป่วย", "ไม่มีคู่ไปดู").forEach(name -> {
@@ -90,16 +88,6 @@ public class SpringBootVueApplication {
 			});
 
 
-
-
-			//---------------------------------------------------------
-			Stream.of("IU Concert", "Dancing Bug", "Somchai voice", "Opala").forEach(name -> {
-				Show show = new Show(); 
-				show.setTitle(name); 
-				showRepository.save(show); 
-			});
-
->>>>>>> fc74f8e539440efa1c321331d78cfc743e0bd9b2
 			Stream.of("10.00-12.00", "13.00-16.00", "9.00-11.00", "17.00-19.00").forEach(name -> {
 				Time time = new Time(); 
 				time.setTime(name); 
@@ -242,7 +230,7 @@ public class SpringBootVueApplication {
 			seatRepository.findAll().forEach(System.out::println);
 			
 		};
-<<<<<<< HEAD
+
 
 	}
 	@PostConstruct
@@ -250,8 +238,8 @@ public class SpringBootVueApplication {
       // Setting Spring Boot SetTimeZone
       TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
-=======
-	}
->>>>>>> fc74f8e539440efa1c321331d78cfc743e0bd9b2
+
+	
+
 	
 }
