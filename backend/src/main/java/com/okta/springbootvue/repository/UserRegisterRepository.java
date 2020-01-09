@@ -16,7 +16,7 @@ interface UserRegisterRepository extends JpaRepository<UserRegister, Long> {
     UserRegister findById(long id);
 
 
-    @Query( value = "SELECT * FROM USERREGISTER  where question_id = :id",
+    @Query( value = "SELECT * FROM USERREGISTER  where register_id = :id",
             nativeQuery = true)
     Collection<UserRegister> findQuest(@Param("id") Long id);
 

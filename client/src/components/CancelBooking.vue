@@ -147,11 +147,9 @@ export default {
         reasonId: "",
         bookingId: "",
       },
-        valid: false,
-        questionCheck: false,
-        ch: false,
+      //  valid: false,
         answer : '',
-        User: [],
+        User : [],
         questions : [],
         reasons : [],
         bookings : [],
@@ -211,9 +209,9 @@ export default {
         .get("/userregister/id="+siteId)
         .then(response => {
           this.User = response.data;
-        //  console.log(this.User[0].question.id  +"-----------"+this.User[0].answer +" xxx "+ this.answer);
+          console.log(this.User[0].question.id  +"-------"+this.User[0].answer +" xxx "+ this.answer);
            if(this.User[0].question.id == this.cancelBooking.questionId && this.User[0].answer == this.answer){
-             alert(5555555555555555555)
+             alert("ยืนยันสำเร็จ")
               this.getReason();
                this.getBooking();
        }
@@ -223,13 +221,7 @@ export default {
         });
      
 },
-    
-
-
-
-
-
-
+  
     // function เมื่อกดปุ่ม save
    saveData() {
     {
@@ -240,7 +232,7 @@ export default {
             "/" +
             this.cancelBooking.reasonId +
             "/"+
-            this.ids,
+            this.siteId,
             {}
             
         )
@@ -269,9 +261,7 @@ export default {
   },
     mounted() {
       this.getQuestion();
-     // this.getUser();
-     // this.getReason();
-    //  this.getBooking();
+    
   }
 };
 </script>
