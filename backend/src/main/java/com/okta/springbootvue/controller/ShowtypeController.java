@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8082")
 @RestController
 public class ShowtypeController {
 

@@ -22,7 +22,7 @@ import com.okta.springbootvue.repository.UserRegisterRepository;
 import com.okta.springbootvue.repository.BookingRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8082")
 @RestController
 public class CancelBookingController {
     @Autowired

@@ -20,7 +20,7 @@ import com.okta.springbootvue.repository.ShowtimeRepository;
 import com.okta.springbootvue.repository.ShowLocationRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8082")
 @RestController
 public class ShowtimeController {
     @Autowired

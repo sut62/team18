@@ -4,6 +4,7 @@ import Showtime from '../components/Showtime';
 import Login from '../components/Login';
 import UserRegister from '../components/UserRegister';
 import Booking from '../components/Booking';
+import CancelBooking from '../components/CancelBooking';
 
 Vue.use(Router);
 
@@ -26,6 +27,10 @@ export default new Router({
     {
         path: '/booking',
         component: Booking
+    },
+    {
+        path: '/cancel',
+        component: CancelBooking
     }
     ]
 });
