@@ -33,7 +33,7 @@
                   solo
                   v-model="receipts.bookingId"
                   :items="bookings"
-                  item-text="name"
+                  item-text="chooseUser.name"
                   item-value="id"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
@@ -49,7 +49,7 @@
                   solo
                   v-model="receipts.bookingId"
                   :items="bookings"
-                  item-text="title"
+                  item-text="chooseShowtime.show.title"
                   item-value="id"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
