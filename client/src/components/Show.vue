@@ -82,7 +82,7 @@
         </v-form>
       </v-col>
     </v-row>
-    <v-container>
+    </v-container>
   
     
  
