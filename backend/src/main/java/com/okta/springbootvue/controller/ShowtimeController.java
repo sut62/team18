@@ -1,4 +1,5 @@
 package com.okta.springbootvue.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import com.okta.springbootvue.entity.Show;
 import com.okta.springbootvue.entity.Showtime;
@@ -36,6 +39,28 @@ public class ShowtimeController {
     ShowtimeController(ShowtimeRepository showtimeRepository) {
         this.showtimeRepository = showtimeRepository;
     }
+
+
+   @GetMapping("/showtimeD/showtimeid={id}")
+    public Collection<Showtime> getShowtimeByShow(@PathVariable("id") Long id) {
+        return showtimeRepository.findShowtimeByShow(id);
+    }
+    
+  
+    @GetMapping("/showtime/showid={id}")
+    public Optional<Showtime> Showtimes_id(@PathVariable Long id) {
+        Optional<Showtime> showtime = showtimeRepository.findById(id);
+        return showtime;
+    }
+  ////////////////
+    @GetMapping("/showDatetime/showid={date}")
+    public Collection<Showtime> getShowtimeByShow(@PathVariable("date") String date) throws ParseException {
+         DateFormat d = new SimpleDateFormat("yyyy-MM-dd");
+        Date showdate = d.parse(date);
+    return showtimeRepository.findDatetime(showdate);
+        }
+
+    
     @GetMapping("/showtimeCheck/{show_id}/{time_id}/{location_id}/{showdatetime}")
     public Collection<Showtime> getSubjectsByStudent(@PathVariable("show_id") Long show_id,
     @PathVariable("time_id") Long time_id,
@@ -63,9 +88,11 @@ public class ShowtimeController {
     Show show = showRepository.findById(show_id);
     Time time = timeRepository.findById(time_id);
     ShowLocation location = showLocationRepository.findById(location_id);
+    
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     Date datetime = df.parse(showdate);
-
+    
+    
     newShowtime.setShow(show);
     newShowtime.setTime(time);
     newShowtime.setLocation(location);

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.okta.springbootvue.entity.Show;
@@ -38,6 +39,12 @@ public class ShowController {
     @GetMapping("/show")
     public Collection<Show> Shows() {
         return showRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/show/showid={id}")
+    public Optional<Show> Shows_id(@PathVariable Long id) {
+        Optional<Show> show = showRepository.findById(id);
+        return show;
     }
 
     @PostMapping("/show/{employee_id}/{ratingshow_id}/{showtype_id}/{title}")

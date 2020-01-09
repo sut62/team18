@@ -9,7 +9,7 @@
       <v-layout text-center wrap>
         <v-flex mb-4>
           <v-col></v-col>
-          
+
           <!-- show -->
           <v-form v-model="validshow" ref="form">
             <v-row justify="center">
@@ -29,7 +29,7 @@
               </v-col>
             </v-row>
           </v-form>
-          
+
           <!-- button show showtime -->
           <v-btn
             rounded
@@ -44,7 +44,13 @@
               <v-card-title>
                 {{showname}}
                 <v-col align="right">
-                  <v-btn outlined color="red" large class="red--text" @click="getShowtimeCheck = false">X</v-btn>
+                  <v-btn
+                    outlined
+                    color="red"
+                    large
+                    class="red--text"
+                    @click="getShowtimeCheck = false"
+                  >X</v-btn>
                 </v-col>
               </v-card-title>
 
@@ -57,13 +63,33 @@
                       solo
                       v-model="booking.showtimeId"
                       :items="showtimes"
-                      item-text="round"
+                      item-text="showDate"
                       item-value="id"
                       hide-selected
                       :rules="[(v) => !!v || '*กรุณาเลือกรอบการแสดง']"
                       required
                     ></v-select>
-                    
+                  <v-col>
+                      <div align="center">
+                    <v-btn
+                      rounded
+                      @click="showDatetime"
+                      :class="{ error: !validshowtime, success: validshowtime }"
+                    >ค้นหาเวลาการแสดง</v-btn>
+                      </div>
+                  </v-col>
+                    <v-select
+                      label="รอบการแสดง"
+                      solo
+                      v-model="booking.showtimeId"
+                      :items="showtimesDate"
+                      item-text="time.time"
+                      item-value="id"
+                      hide-selected
+                      :rules="[(v) => !!v || '*กรุณาเลือกรอบการแสดง']"
+                      required
+                    ></v-select>
+
                     <!-- button show zone -->
                     <div align="center">
                       <v-btn
@@ -93,7 +119,7 @@
                         solo
                         :rules="[(v) => !!v || '*กรุณาเลือกโซน']"
                       ></v-select>
-                      
+
                       <!-- button show seat-->
                       <div align="center">
                         <v-btn
@@ -137,7 +163,7 @@
               </div>
             </v-card>
           </v-dialog>
-          
+
           <!-- confirm -->
           <v-dialog v-model="getConfirm" persistent max-width="500px">
             <v-card>
@@ -192,7 +218,7 @@ export default {
   data() {
     return {
       booking: {
-        userId: 1,
+        userId: localStorage.getItem("siteId"),
         showId: "",
         showtimeId: "",
         zoneId: "",
@@ -200,6 +226,7 @@ export default {
       },
       shows: [],
       showtimes: [],
+      showtimesDate: [],
       seats: [],
       zones: [],
       validzone: false,
@@ -209,12 +236,13 @@ export default {
       getZoneCheck: false,
       getShowtimeCheck: false,
       getConfirm: false,
-      username: "",
+      username: localStorage.getItem("siteUser"),
       showname: "",
       showtime: "",
       zone: "",
       price: "",
-      seat: ""
+      seat: "",
+      showDateString: ""
     };
   },
   methods: {
@@ -255,7 +283,7 @@ export default {
     },
     getShowtimes() {
       http
-        .get("/showtime/showid=" + this.booking.showId)
+        .get("/showtimeD/showtimeid=" + this.booking.showId) /////////////
         .then(response => {
           this.showtimes = response.data;
           console.log(response.data);
@@ -266,11 +294,24 @@ export default {
       this.disShow();
       this.disShowtime();
     },
-    disShowtime() {
+    showDatetime() {
       http
         .get("/showtime/showtimeid=" + this.booking.showtimeId)
         .then(response => {
-          this.showtime = response.data.round;
+          this.showtimesDate = response.data;
+          this.showDateString = response.data.showDate;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    disShowtime() {
+      http
+        .get("/showDatetime/showtimeid=" + this.booking.showId)
+        .then(response => {
+          this.showtime = response.data.showDate;
           console.log(response.data);
         })
         .catch(e => {
@@ -398,6 +439,7 @@ export default {
             type: "success"
           }).then(r => {
             console.log(r.value);
+            window.location.reload();
             //this.$router.push("/viewbooking");
           });
         })

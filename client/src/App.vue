@@ -11,7 +11,7 @@
         <v-btn text href="/booking/" target="_self" class="white--text">Booking</v-btn>
         <v-btn text href="/cancel" target="_self" class="white--text">Cancel Booking</v-btn>
         <v-btn @click="logOut" text target="_self" class="white--text">LOGOUT    </v-btn>
-        <span>{{this.ids}}</span>
+        <span class="white--text" >{{this.ids}}</span>
         </v-toolbar-title>
 
 
@@ -23,7 +23,7 @@
         <v-btn text href="/showtime" target="_self" class="white--text">Showtime</v-btn>
         <v-btn text href="/receipt" target="_self" class="white--text">Receipt</v-btn>
         <v-btn @click="logOut" text target="_self" class="white--text">LOGOUT    </v-btn>
-        <span>{{this.nm}}</span>
+        <span class="white--text" >{{this.nm}}</span>
         </v-toolbar-title>
 
 

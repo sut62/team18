@@ -5,18 +5,35 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 
+import java.util.TimeZone;
 import java.util.stream.Stream;
 
+import javax.annotation.PostConstruct;
+
+import com.okta.springbootvue.entity.Employee;
+import com.okta.springbootvue.entity.Payment;
+import com.okta.springbootvue.entity.Question;
+import com.okta.springbootvue.entity.Ratingshow;
 import com.okta.springbootvue.entity.Seat;
+import com.okta.springbootvue.entity.Sex;
 import com.okta.springbootvue.entity.Zone;
 import com.okta.springbootvue.entity.Show;
 import com.okta.springbootvue.entity.ShowLocation;
+import com.okta.springbootvue.entity.Showtype;
 import com.okta.springbootvue.entity.Time;
+import com.okta.springbootvue.entity.TypeName;
+import com.okta.springbootvue.repository.EmployeeRepository;
+import com.okta.springbootvue.repository.PaymentRepository;
+import com.okta.springbootvue.repository.QuestionRepository;
+import com.okta.springbootvue.repository.RatingshowRepository;
 import com.okta.springbootvue.repository.SeatRepository;
+import com.okta.springbootvue.repository.SexRepository;
 import com.okta.springbootvue.repository.ZoneRepository;
 import com.okta.springbootvue.repository.ShowLocationRepository;
 import com.okta.springbootvue.repository.ShowRepository;
+import com.okta.springbootvue.repository.ShowtypeRepository;
 import com.okta.springbootvue.repository.TimeRepository;
+import com.okta.springbootvue.repository.TypeNameRepository;
 
 @SpringBootApplication
 public class SpringBootVueApplication {
@@ -24,16 +41,14 @@ public class SpringBootVueApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootVueApplication.class, args);
 	}
-	/*
+	
 	@Bean
-	ApplicationRunner init(ShowRepository showRepository, TimeRepository timeRepository, ShowLocationRepository showLocationRepository, ZoneRepository zoneRepository, SeatRepository seatRepository) {
+	ApplicationRunner init(TimeRepository timeRepository, ShowLocationRepository showLocationRepository, 
+	ZoneRepository zoneRepository, SeatRepository seatRepository ,PaymentRepository paymentRepository,
+	SexRepository sexRepository,TypeNameRepository typeNameRepository  ,  QuestionRepository questionRepository,
+	 RatingshowRepository ratingshowRepository, ShowtypeRepository showtypeRepository,EmployeeRepository employeeRepository) {
 		return args -> {
-			Stream.of("IU Concert", "Dancing Bug", "Somchai voice", "Opala").forEach(name -> {
-				Show show = new Show(); 
-				show.setTitle(name); 
-				showRepository.save(show); 
-			});
-
+			
 			Stream.of("10.00-12.00", "13.00-16.00", "9.00-11.00", "17.00-19.00").forEach(name -> {
 				Time time = new Time(); 
 				time.setTime(name); 
@@ -125,13 +140,63 @@ public class SpringBootVueApplication {
 			E3.setStatus("N");
 			seatRepository.save(E3);
 
-			showRepository.findAll().forEach(System.out::println); // แสดง ข้อมูลทั้งหมดใน Entity Customer บน Terminal
+			Stream.of("ชำระผ่านบัตรเครดิต/เดบิต", "ชำระเงินสด", "ชำระผ่านธนาคาร", "ชำระผ่านมือถือ").forEach(name -> {
+				Payment payment = new Payment(); 
+				payment.setName(name); 
+				paymentRepository.save(payment); 
+			});
+			Stream.of("ชาย", "หญิง", "ไม่ระบุ").forEach(name -> {
+				Sex sex = new Sex();
+				sex.setName(name); 
+				sexRepository.save(sex); 
+			});
+
+			Stream.of("นาย", "นางสาว", "นาง").forEach(name -> {
+				TypeName typename = new TypeName(); 
+				typename.setName(name);
+				typeNameRepository.save(typename); 
+			});
+
+			Stream.of("บ้านเกิดคุณอยู่ที่ไหน", "สัตว์เลี้ยงของคุณชื่ออะไร", "นักร้องที่คุณชื่นชอบ" ,"สถานที่ที่คุณชื่นชอบ").forEach(name -> {
+				Question question = new Question(); 
+				question.setName(name); 
+				questionRepository.save(question); 
+			});
+			Stream.of("ทุกวัย", "อายุ 13ปีขึ้นไป", "อายุ 18ปีขึ้นไป").forEach(name -> {
+				Ratingshow ratingshow = new Ratingshow(); // สร้าง Object Ratingshow
+				ratingshow.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Ratingshow
+				ratingshowRepository.save(ratingshow); // บันทึก Objcet ชื่อ Ratingshow
+			});
+
+			Stream.of("ตลก", "ระทึกขวัญ", "โรแมนติก", "เทพนิยาย", "สยองขวัญ", "ดราม่า", "ละครเพลง").forEach(name -> {
+				Showtype showtype = new Showtype(); // สร้าง Object Customer
+				showtype.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Customer
+				showtypeRepository.save(showtype); // บันทึก Objcet ชื่อ Customer
+			});
+
+			Employee e1 = new  Employee();
+			e1.setName("peter");
+			e1.setPass("1234");
+			employeeRepository.save(e1);
+
+			Employee e2 = new  Employee();
+			e2.setName("adam");
+			e2.setPass("1234");
+			employeeRepository.save(e2);
+
+		 
 			timeRepository.findAll().forEach(System.out::println); // แสดง ข้อมูลทั้งหมดใน Entity Employee บน Terminal
 			showLocationRepository.findAll().forEach(System.out::println); // แสดง ข้อมูลทั้งหมดใน Entity RentalType บน Terminal
 			zoneRepository.findAll().forEach(System.out::println); 
 			seatRepository.findAll().forEach(System.out::println);
 			
 		};
-	}*/
+
+	}
+	@PostConstruct
+    public void init(){
+      // Setting Spring Boot SetTimeZone
+      TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+    }
 	
 }

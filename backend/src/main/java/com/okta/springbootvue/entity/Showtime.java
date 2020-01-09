@@ -1,4 +1,5 @@
 package com.okta.springbootvue.entity;
+
 import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,8 +24,8 @@ public class Showtime {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="showtime_seq")
     @Column(name = "SHOWTIME_ID", unique = true, nullable = true)
     private @NonNull Long id;
-
-    @JsonFormat(pattern="yyyy-MM-dd")
+    
+    @JsonFormat(pattern="yyyy-MM-dd")    
     @Column(name="SHOW_DATE")
     private @NonNull Date showDate;
 
