@@ -226,7 +226,7 @@ export default {
     };
   },
   methods: {
-    /* eslint-disable no-console */
+    
 
     // ดึงข้อมูล NameTppe ใส่ combobox
     getTypeName() {
