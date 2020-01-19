@@ -1,5 +1,7 @@
 <template>
+
   <v-container >
+    
     <v-card
       class="mx-auto "
       max-width="400"
@@ -17,7 +19,7 @@
       <v-col class="d-flex mx-auto " cols="12" sm="10" >
         
           <v-select 
-          
+            id="showtime01"
             v-model="Showtime.showId"
             :items="shows"
             item-text="title"
@@ -44,6 +46,8 @@
         <v-col class="d-flex mx-auto" cols="12" sm="10" >
         
           <v-select
+
+            id = "show01"
             v-model="Showtime.locationId"
             :items="locations"
             item-text="location"
@@ -109,20 +113,49 @@
         >
           SAVE
         </v-btn>
-  
+    <!-- check และแสดงแจ้งเตือน -->
+        <v-dialog v-model="dialog" persistent max-width="290" >
+   <template v-slot:activator="{ on }">
+        
         <v-btn
+          v-on="on"
           @click="findcheck()"
           color="indigo darken-3"
           text
         >
           CHECK
         </v-btn>
+        
+  </template>
+      <v-card>
+        <v-card-title class="headline">แจ้งเตือน</v-card-title>
+        <v-card-text v-if="this.Showtime.statuss==true">ไม่มีรอบการแสดงซ้ำ</v-card-text>
+        <v-card-text v-if="this.Showtime.statuss==null">มีรอบการแสดงซ้ำ</v-card-text>
+        <v-card-text v-if="this.Showtime.statuss==false">กรุณากรอกข้อมูลให้ครบ</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          
+          <v-btn color="green darken-1" text @click="dialog = false">ยืนยัน</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- จบ check และแสดงแจ้งเตือน -->
+  
+        
+        
+        
       </v-card-actions>
       </v-row>
-      
+     
     </v-card>
+
+ 
+     
     
-  </v-container>
+      
+    
+</v-container>  
+
 </template>
 
 <script>
@@ -140,10 +173,12 @@ export default {
         img:'./assets/test.jpg',
         startMenu: false,
         start: '',
+        statuss:false
       },
       shows:[],
       times:[],
-      locations:[]
+      locations:[],
+      dialog: false
       
       
     };
@@ -200,12 +235,12 @@ export default {
         .then(response => {
           console.log(response);
           if (response.data[0] != null) {
-            alert('มีรอบการแสดงซ้ำ')
-            
+            //alert('มีรอบการแสดงซ้ำ')
+            this.Showtime.statuss = null;
             
           } else {
-            alert('ไม่มีรอบการแสดงซ้ำ')
-            
+            //alert('ไม่มีรอบการแสดงซ้ำ')
+            this.Showtime.statuss = true;
           }          
         })
         .catch(e => {
