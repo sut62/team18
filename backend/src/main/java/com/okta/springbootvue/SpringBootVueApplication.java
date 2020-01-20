@@ -106,61 +106,61 @@ public class SpringBootVueApplication {
 			// seat 
 
 			//zone C
-			Seat C1 = new Seat();
-			C1.setSeatNum("C1");
-			C1.setChooseSeat(zoneC);
-			C1.setStatus("N");
-			seatRepository.save(C1);
+			Seat C01 = new Seat();
+			C01.setSeatNum("C01");
+			C01.setChooseSeat(zoneC);
+			C01.setStatus("N");
+			seatRepository.save(C01);
 			
-			Seat C2 = new Seat();
-			C2.setSeatNum("C2");
-			C2.setChooseSeat(zoneC);
-			C2.setStatus("N");
-			seatRepository.save(C2);
+			Seat C02 = new Seat();
+			C02.setSeatNum("C02");
+			C02.setChooseSeat(zoneC);
+			C02.setStatus("N");
+			seatRepository.save(C02);
 			
-			Seat C3 = new Seat();
-			C3.setSeatNum("C3");
-			C3.setChooseSeat(zoneC);
-			C3.setStatus("N");
-			seatRepository.save(C3);
+			Seat C03 = new Seat();
+			C03.setSeatNum("C03");
+			C03.setChooseSeat(zoneC);
+			C03.setStatus("N");
+			seatRepository.save(C03);
 
 			//zone D
-			Seat D1 = new Seat();
-			D1.setSeatNum("D1");
-			D1.setChooseSeat(zoneD);
-			D1.setStatus("N");
-			seatRepository.save(D1);
+			Seat D01 = new Seat();
+			D01.setSeatNum("D01");
+			D01.setChooseSeat(zoneD);
+			D01.setStatus("N");
+			seatRepository.save(D01);
 			
-			Seat D2 = new Seat();
-			D2.setSeatNum("D2");
-			D2.setChooseSeat(zoneD);
-			D2.setStatus("N");
-			seatRepository.save(D2);
+			Seat D02 = new Seat();
+			D02.setSeatNum("D02");
+			D02.setChooseSeat(zoneD);
+			D02.setStatus("N");
+			seatRepository.save(D02);
 			
-			Seat D3 = new Seat();
-			D3.setSeatNum("D3");
-			D3.setChooseSeat(zoneD);
-			D3.setStatus("N");
-			seatRepository.save(D3);
+			Seat D03 = new Seat();
+			D03.setSeatNum("D03");
+			D03.setChooseSeat(zoneD);
+			D03.setStatus("N");
+			seatRepository.save(D03);
 			
 			//zone E
-			Seat E1 = new Seat();
-			E1.setSeatNum("E1");
-			E1.setChooseSeat(zoneE);
-			E1.setStatus("N");
-			seatRepository.save(E1);
+			Seat E01 = new Seat();
+			E01.setSeatNum("E01");
+			E01.setChooseSeat(zoneE);
+			E01.setStatus("N");
+			seatRepository.save(E01);
 			
-			Seat E2 = new Seat();
-			E2.setSeatNum("E2");
-			E2.setChooseSeat(zoneE);
-			E2.setStatus("N");
-			seatRepository.save(E2);
+			Seat E02 = new Seat();
+			E02.setSeatNum("E02");
+			E02.setChooseSeat(zoneE);
+			E02.setStatus("N");
+			seatRepository.save(E02);
 			
-			Seat E3 = new Seat();
-			E3.setSeatNum("E3");
-			E3.setChooseSeat(zoneE);
-			E3.setStatus("N");
-			seatRepository.save(E3);
+			Seat E03 = new Seat();
+			E03.setSeatNum("E03");
+			E03.setChooseSeat(zoneE);
+			E03.setStatus("N");
+			seatRepository.save(E03);
 
 			Stream.of("ชำระผ่านบัตรเครดิต/เดบิต", "ชำระเงินสด", "ชำระผ่านธนาคาร", "ชำระผ่านมือถือ").forEach(name -> {
 				Payment payment = new Payment(); 
