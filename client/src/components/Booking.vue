@@ -16,6 +16,7 @@
               <v-col cols="auto">
                 <p class="blue-grey--text text--darken-4">เลือกการแสดง</p>
                 <v-select
+                  id="b-show"
                   label="การแสดง"
                   solo
                   v-model="booking.showId"
@@ -60,6 +61,7 @@
                 <v-row justify="center">
                   <v-col cols="auto">
                     <v-select
+                      id="b-showtime"
                       label="รอบการแสดง"
                       solo
                       v-model="booking.showtimeId"
@@ -79,7 +81,10 @@
                     >ค้นหาเวลาการแสดง</v-btn>
                       </div>
                   </v-col>
+
+                  <!-- time -->
                     <v-select
+                  id="b-time"
                       label="รอบการแสดง"
                       solo
                       v-model="booking.timeId"
@@ -110,6 +115,7 @@
                   <v-row justify="center">
                     <v-col cols="auto">
                       <v-select
+                  id="b-zone"
                         v-model="booking.zoneId"
                         :items="zones"
                         item-text="zone"
@@ -139,6 +145,7 @@
                   <v-row justify="center">
                     <v-col cols="auto">
                       <v-select
+                  id="b-seat"
                         label="กรุณาเลือกที่นั่ง"
                         solo
                         v-model="booking.seatId"
