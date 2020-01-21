@@ -1,10 +1,12 @@
 package com.okta.springbootvue.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 import com.okta.springbootvue.entity.Receipts;
 import com.okta.springbootvue.entity.Payment;
@@ -47,6 +49,7 @@ public class ReceiptsController {
     newReceipts.setCreatedBy(employee);
     newReceipts.setBooking(booking);
     newReceipts.setPayment(payment);
+    newReceipts.setReceipts_datetime(new Date());
 
     return receiptsRepository.save(newReceipts); 
     }
