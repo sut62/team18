@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+import java.util.Date;
+
 //import java.util.Set;
 
 import javax.persistence.Column;
@@ -28,6 +30,9 @@ public class Receipts {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="receipts_seq")
     @Column(name = "RECEIPTS_ID", unique = true, nullable = true)
     private @NonNull Long id;
+
+    @Column(name="RECEIPTS_DATETIME")
+    private @NonNull Date receipts_datetime;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
@@ -50,6 +55,9 @@ public class Receipts {
 	}
 	public void setBooking(Booking booking) {
         this.booking = booking;
+        }
+        public void setReceipts_datetime(Date date) {
+                this.receipts_datetime = date;
 	}
 
 }
