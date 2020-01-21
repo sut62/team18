@@ -1,4 +1,5 @@
 package com.okta.springbootvue.entity;
+
 import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
@@ -7,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
 
 @Data
 @Entity
@@ -19,7 +21,9 @@ public class Time {
     @Column(name="TIME_ID",unique = true, nullable = true)
     private @NonNull Long id;
 
-    private @NonNull String time;
+    
+    //@Pattern(regexp = "[A-Z0-9]*")
+    private String time;
 
 	public void setTime(String name) {
         this.time = name;
