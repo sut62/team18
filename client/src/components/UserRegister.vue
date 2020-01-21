@@ -23,6 +23,7 @@
           <v-select 
           label="คำนำหน้า"
                 solo
+                id="typename"
                 v-model="userregister.nametypeId"
                 :items="nametype"
                 item-text="type_name"
@@ -38,6 +39,7 @@
         
            <v-text-field
                 solo
+                id="name"
                 label="ชื่อ-นามสกุล"
                 v-model= "name"
                 :rules="[(v) => !!v || 'กรุณาใส่ ชื่อ-นามสกุล']"
@@ -53,6 +55,7 @@
         
           <v-text-field
                 solo
+                id="email"
                 label="Email"
                 v-model= "email"
                 :rules="[(v) => !!v || 'กรุณาใส่ Email']"
@@ -68,6 +71,7 @@
         
           <v-text-field
                 solo
+                id="Phone"
                 label="Phone number"
                 v-model= "tel"
                 :rules="[(v) => !!v || 'กรุณาใส่ เบอร์โทรศัพท์']"
@@ -83,6 +87,7 @@
           <v-select 
           label="เพศ"
                 solo
+                id="sex"
                 v-model="userregister.sexId"
                 :items="sexs"
                 item-text="sex"
@@ -101,6 +106,7 @@
           <v-select 
          label="เลือกคำถาม"
                 solo
+                id="question"
                 v-model="userregister.questionId"
                 :items="questions "
                 item-text="question"
@@ -117,6 +123,7 @@
         
           <v-text-field
                 solo
+                id="answer"
                 label="Answer"
                 v-model= "answer"
                 :rules="[(v) => !!v || 'กรุณาใส่ ตอบคำถามการยืนยัน']"
@@ -130,8 +137,9 @@
             <v-col cols="10">
               <v-text-field
                 solo
+                id="password"
                 label="PASSWORD"
-                v-model= "password"
+                v-model= "password" 
                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]"
                 :type="show1 ? 'text' : 'password'"
@@ -141,6 +149,7 @@
                 counter
                 clearable
                 @click:append="show1 = !show1"
+                
               ></v-text-field>
             </v-col>
           </v-row>
@@ -150,6 +159,7 @@
             <v-col cols="10">
               <v-text-field
                 solo
+                id="repassword"
                 label="ยืนยัน PASSWORD"
                 v-model= "repassword"
                 :type="show2 ? 'text' : 'password'"
@@ -166,29 +176,52 @@
           </v-row>
  
          
-      <v-row justify="center" >
+            <v-row justify="center" >
       <v-card-actions >
+        
+    
+        <v-dialog v-model="dialog" persistent max-width="290" >
+   <template v-slot:activator="{ on }">
         <v-btn
-          @click="saveData()"
+          v-on="on"
+          @click="checkPass()"
           color="indigo darken-3"
           text
         >
           SAVE
         </v-btn>
+  </template>
+    
+        
+      <v-card>
+        <v-card-title class="headline">แจ้งเตือน</v-card-title>
+        <v-card-text v-if="this.statuss==true">บันทึกสำเร็จ</v-card-text>
+        <v-card-text v-if="this.statuss==null">กรุณากรอกข้อมูลให้ครบ</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          
+          <v-btn color="green darken-1" text @click="dialog = false">ยืนยัน</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- จบ check และแสดงแจ้งเตือน -->
   
+        
         <v-btn
+          v-on="on"
           @click="clear()"
           color="indigo darken-3"
           text
         >
           CLEAR
         </v-btn>
+        
       </v-card-actions>
       </v-row>
     
         </v-form>
     </v-card>
-    
+   
   </v-container>
 </template>
 
@@ -214,19 +247,30 @@ export default {
         answer : '',
         password : '',
         repassword : '',
+        statuss:true,
         questions : [],
         nametype : [],
         sexs : [],
-      rules: {
+       
+       dialog: false,
+        rules: {
           required: value => !!value || 'This field is required',
-          min: v => v.length >= 8 || 'Min 8 characters',
+          min: min => min.length >= 8 || 'Min 8 characters',
           checkpass: () => this.repassword == this.password || 'Passwords do not match',
-      }
-      
+          }
+          
     };
   },
   methods: {
-    
+    checkPass(){
+      if(this.password.length<8){
+      this.statuss = null;
+      
+      }else{
+        this.statuss = true;
+        this.saveData();
+      }
+    },
 
     // ดึงข้อมูล NameTppe ใส่ combobox
     getTypeName() {
@@ -287,20 +331,28 @@ export default {
             "/" +
             this.answer +
             "/" +
-            this.password ,
+            this.password,
           
             {}
         )
         .then(response => {
           console.log(response);
-            alert('บันทึกสำเร็จ')
-            this.$router.push("/");
+           // alert('บันทึกสำเร็จ')
+           
+           //this.statuss==true;
+          //this.$router.push("/");
+          this.clear();
 
         })
         .catch(e => {
           console.log(e);
-          alert('กรุณาใส่ข้อมูลให้ครบถ้วน')
+          //alert('กรุณาใส่ข้อมูลให้ครบถ้วน')
+          
+           this.statuss =null;
         });
+         
+      
+        
       this.submitted = true;
     }
     
