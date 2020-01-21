@@ -12,6 +12,9 @@ import javax.persistence.Table;
 
 import com.okta.springbootvue.entity.Question;
 import com.okta.springbootvue.entity.UserRegister;
+
+import org.springframework.lang.Nullable;
+
 import com.okta.springbootvue.entity.Booking;
 
 import javax.persistence.GeneratedValue;
@@ -33,11 +36,11 @@ public class CancelBooking {
     @SequenceGenerator(name="CANCELBOOKING_seq",sequenceName="CANCELBOOKING_seq")               
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CANCELBOOKING_seq")  
     @Column(name = "CANCELBOOKING_ID", unique = true, nullable = true)
-    private @NonNull Long ID;
+    private @NonNull Long id;
     
     
  @Column(name="DATE")
-   private @NonNull LocalDateTime date;
+   private @Nullable LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserRegister.class)
     @JoinColumn(name = "REGISTER_ID", insertable = true)
@@ -71,6 +74,11 @@ public class CancelBooking {
 
 	public void setUser(UserRegister userregister) {
             this.cancelBy = userregister;
+	}
+
+
+	public Long getId() {
+		return this.id;
 	}
 
 
