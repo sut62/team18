@@ -6,6 +6,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,14 +30,19 @@ public class Showtime {
     @Column(name = "SHOWTIME_ID", unique = true, nullable = true)
     private @NonNull Long id;
     
+    //@Pattern(regexp = "(?:[0-9][0-9])?[0-9][0-9]-(1[0-2]|0[0-9])-([0-2][0-9]|3[0-1])")
+    @NotNull
+    @Future
     @JsonFormat(pattern="yyyy-MM-dd")    
     @Column(name="SHOW_DATE")
-    private @NonNull Date showDate;
+    private  Date showDate;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Time.class)
     @JoinColumn(name = "TIME_ID", insertable = true)
     private Time time;
-
+   
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ShowLocation.class)
     @JoinColumn(name = "SHOWLOCATION_ID", insertable = true)
     private ShowLocation location;
@@ -55,6 +65,10 @@ public class Showtime {
 
 	public void setShowDate(Date date) {
         this.showDate = date;
+	}
+
+	public Long getId() {
+		return this.id;
 	}
 
 }
