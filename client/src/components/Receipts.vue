@@ -13,6 +13,7 @@
             <!-- ชื่อพนักงาน -->
               <v-col cols="3">
                 <v-select
+                  id = "emp_name"
                   label="เลือกชื่อพนักงาน"
                   solo
                   v-model="receipts.employeeId"
@@ -29,6 +30,7 @@
             <!-- ชื่อลูกค้า -->
               <v-col cols="3">
                 <v-select
+                  id = "cus_name"
                   label="เลือกชื่อลูกค้า"
                   solo
                   v-model="receipts.bookingId"
@@ -45,6 +47,7 @@
             <!-- เลือกตั๋วการแสดง -->
               <v-col cols="3">
                 <v-select
+                  id = "booking"
                   label="เลือกตั๋วการแสดง"
                   solo
                   v-model="receipts.bookingId"
@@ -61,6 +64,7 @@
             <!-- เลือกประเภทการชำระเงิน -->
               <v-col cols="3">
                 <v-select
+                  id = "payment"
                   label="เลือกประเภทการชำระเงิน"
                   solo
                   v-model="receipts.paymentId"
@@ -153,13 +157,30 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกข้อมูลสำเร็จ");
+          this.$fire({
+            title: "บันทึกข้อมูลสำเร็จ",
+            type: "success"
+          }).then(r => {
+            console.log(r.value);
+            window.location.reload();
+            //this.$router.push("/viewbooking");
+          });
         })
         .catch(e => {
           console.log(e);
-          alert("บันทึกข้อมูลไม่สำเร็จ");
+          this.$fire({
+            title: "บันทึกข้อมูลไม่สำเร็จ",
+            type: "error"
+          })
         });
+      this.submitted = true;
     },
+    refreshList() {
+      this.getBookings();
+      this.getEmployees();
+      this.getPayments();
+    }
+    /* eslint-enable no-console */
   },
   mounted() {
     this.getBookings();
