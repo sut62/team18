@@ -9,6 +9,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import lombok.*;
 
 import com.okta.springbootvue.entity.Question;
 import com.okta.springbootvue.entity.UserRegister;
@@ -38,9 +42,12 @@ public class CancelBooking {
     @Column(name = "CANCELBOOKING_ID", unique = true, nullable = true)
     private @NonNull Long id;
     
+
+  @Size(min = 2, max = 30, message = "ERROR")
+    private @NotNull String Ans;
     
  @Column(name="DATE")
-   private @Nullable LocalDateTime date;
+   private @NotNull LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserRegister.class)
     @JoinColumn(name = "REGISTER_ID", insertable = true)
@@ -57,30 +64,6 @@ public class CancelBooking {
 
     
        
-
-
-	public void setDate(LocalDateTime date) {
-          this.date = date ;
-	}
-
-	
-	public void setReason(CancelReason cancelreason) {
-        this.cancelCaused = cancelreason ;
-	}
-
-	public void setBooking(Booking booking) {
-            this.cancelBook = booking;
-	}
-
-	public void setUser(UserRegister userregister) {
-            this.cancelBy = userregister;
-	}
-
-
-	public Long getId() {
-		return this.id;
-	}
-
 
 }
 
