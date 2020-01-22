@@ -106,13 +106,35 @@
       </v-row>
       <v-row justify="center" >
       <v-card-actions >
+        <!-- save และแสดงแจ้งเตือน -->
+        <v-dialog v-model="dialog2" persistent max-width="290" >
+   <template v-slot:activator="{ on }">
+        
         <v-btn
+          v-on="on"
           @click="saveShowtime()"
           color="indigo darken-3"
           text
         >
-          SAVE
+          save
         </v-btn>
+        
+  </template>
+      <v-card>
+        <v-card-title class="headline">แจ้งเตือน</v-card-title>
+        <v-card-text v-if="this.Showtime.statuss2==false">บันทึกข้อมูลสำเร็จ</v-card-text>
+        <v-card-text v-if="this.Showtime.statuss2==null">กรุณากรอกข้อมูลให้ถูกต้อง</v-card-text>
+        
+        
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          
+          <v-btn color="green darken-1" text @click="dialog2 = false">ยืนยัน</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- จบ save และแสดงแจ้งเตือน -->
+    <p>{{this.Showtime.statuss2}}</p>
     <!-- check และแสดงแจ้งเตือน -->
         <v-dialog v-model="dialog" persistent max-width="290" >
    <template v-slot:activator="{ on }">
@@ -173,12 +195,14 @@ export default {
         img:'./assets/test.jpg',
         startMenu: false,
         start: '',
-        statuss:false
+        statuss:false,
+        statuss2:false
       },
       shows:[],
       times:[],
       locations:[],
-      dialog: false
+      dialog: false,
+      dialog2: false
       
       
     };
@@ -265,16 +289,18 @@ export default {
         .then(response => {
           console.log(response);
           //this.$router.push("/view");
-          alert('บันทึกรอบการแสดงสำเร็จ')
-          this.Clears();
+          //alert('บันทึกรอบการแสดงสำเร็จ')
+          this.Showtime.statuss2 = false;
+          this.clear();
         })
         .catch(e => {
           console.log(e);
+          this.Showtime.statuss2 = null;
         });
       this.submitted = true;
     },
-    Clears(){
-      window.location.reload()
+    clear(){
+      this.$refs.form.reset();
     },
     
     refreshList() {
