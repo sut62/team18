@@ -12,6 +12,7 @@
             <!-- ชื่อพนักงาน -->
               <v-col cols="3">
                 <v-select
+                  id = "emp_name"
                   label="เลือกชื่อพนักงาน"
                   solo
                   v-model="show.employeeId"
@@ -29,6 +30,7 @@
             <!-- กรอกชื่อการแสดง -->
             <v-col cols="3">
               <v-text-field
+                id = "showname"
                 solo
                 label="กรอกชื่อการแสดง"
                 v-model="title"
@@ -43,6 +45,7 @@
             <!-- ประเภทการแสดง -->
               <v-col cols="3">
                 <v-select
+                  id = "type_show"
                   label="ประเภทการแสดง"
                   solo
                   v-model="show.showtypeId"
@@ -60,6 +63,7 @@
             <!-- เรทการแสดง -->
               <v-col cols="3">
                 <v-select
+                  id = "rate_show"
                   label="เรทการแสดง"
                   solo
                   v-model="show.ratingshowId"
@@ -166,14 +170,30 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกข้อมูลสำเร็จ");  
+          this.$fire({
+            title: "บันทึกข้อมูลสำเร็จ",
+            type: "success"
+          }).then(r => {
+            console.log(r.value);
+            window.location.reload();
+          });
         })
-    .catch(e => {
+        .catch(e => {
           console.log(e);
-          alert("บันทึกข้อมูลไม่สำเร็จ");
+          this.$fire({
+            title: "บันทึกข้อมูลไม่สำเร็จ",
+            type: "error"
+          })
         });
+      this.submitted = true;
     },
-    },
+    refreshList() {
+      this.getBookings();
+      this.getEmployees();
+      this.getPayments();
+    }
+    /* eslint-enable no-console */
+  },
     
   
     mounted() {
