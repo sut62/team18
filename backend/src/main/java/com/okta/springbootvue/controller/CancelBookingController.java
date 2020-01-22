@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
+import lombok.*;
 
 import com.okta.springbootvue.entity.Booking;
 import com.okta.springbootvue.entity.CancelBooking;
@@ -45,21 +46,22 @@ public class CancelBookingController {
         return cancelBookingRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/cancelbooking/{book_id}/{reason_id}/{userRegister_id}")
+    @PostMapping("/cancelbooking/{book_id}/{reason_id}/{userRegister_id}/{Ans}")
     public CancelBooking newCancelBooking(CancelBooking newCancelBooking,
     @PathVariable long reason_id,
     @PathVariable long book_id,
-    @PathVariable long userRegister_id) {
+    @PathVariable long userRegister_id,
+    @PathVariable String Ans) {
     UserRegister userregister  = userRegisterRepository.findById(userRegister_id);
     CancelReason cancelreason = cancelReasonRepository.findById(reason_id);
     Booking booking = bookingRepository.findById(book_id);
     LocalDateTime now = LocalDateTime.now();
    
 
-    
-    newCancelBooking.setUser(userregister);
-    newCancelBooking.setBooking(booking);
-    newCancelBooking.setReason(cancelreason);
+    newCancelBooking.setAns(Ans);
+    newCancelBooking.setCancelBy(userregister);
+    newCancelBooking.setCancelBook(booking);
+    newCancelBooking.setCancelCaused(cancelreason);
     newCancelBooking.setDate(now);
     
    

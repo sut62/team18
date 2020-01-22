@@ -282,7 +282,9 @@ export default {
             "/" +
             this.cancelBooking.reasonId +
             "/"+
-            this.a,
+            this.a +
+             "/"+
+            this.answer,
             {}
             
            
