@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.util.Collection;
 
@@ -27,13 +29,23 @@ public class Payment {
     @Column(name = "PAYMENT_ID", unique = true, nullable = true)
     private @NonNull Long id;
 
-    private @NonNull String type;
+    @NotNull
+    @Size(min = 10, max = 24)
+    private String type;
 
     //@OneToMany(fetch = FetchType.EAGER)
     //private Collection<Receipts> receipts;
 
 	public void setName(String name) {
         this.type = name;
+	}
+
+	public Object getName() {
+		return this.type;
+	}
+
+	public Long getId() {
+		return this.id;
 	}
 
 }
