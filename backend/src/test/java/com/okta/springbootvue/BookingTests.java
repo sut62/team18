@@ -75,7 +75,7 @@ public class BookingTests {
     }
 
     @Test
-    void testSeatNumberMustBe1CharAnd2Digits() { // seat number ต้องมี 1 ตัวอักษรและ 2 ตัวเลข
+    void B6001803_testSeatNumberMustBe1CharAnd2Digits() { // seat number ต้องมี 1 ตัวอักษรและ 2 ตัวเลข
 
         Zone zone = new Zone();
         zone.setName("C");
@@ -97,7 +97,7 @@ public class BookingTests {
     }
 
     @Test
-    void testSeatStatusMustBeYorN() { //seat status ต้องเป็น Y หรือ N เท่านั้น
+    void B6001803_testSeatStatusMustBeYorN() { //seat status ต้องเป็น Y หรือ N เท่านั้น
         
         Zone zone = new Zone();
         zone.setName("C");
