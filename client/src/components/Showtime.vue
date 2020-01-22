@@ -122,8 +122,8 @@
   </template>
       <v-card>
         <v-card-title class="headline">แจ้งเตือน</v-card-title>
-        <v-card-text v-if="this.Showtime.statuss2==false">บันทึกข้อมูลสำเร็จ</v-card-text>
-        <v-card-text v-if="this.Showtime.statuss2==null">กรุณากรอกข้อมูลให้ถูกต้อง</v-card-text>
+        <v-card-text v-if="this.Showtime.statuss2==true">บันทึกข้อมูลสำเร็จ</v-card-text>
+        <v-card-text v-if="this.Showtime.statuss2==false">กรุณากรอกข้อมูลให้ถูกต้อง</v-card-text>
         
         
         <v-card-actions>
@@ -134,7 +134,7 @@
       </v-card>
     </v-dialog>
     <!-- จบ save และแสดงแจ้งเตือน -->
-    <p>{{this.Showtime.statuss2}}</p>
+    
     <!-- check และแสดงแจ้งเตือน -->
         <v-dialog v-model="dialog" persistent max-width="290" >
    <template v-slot:activator="{ on }">
@@ -290,14 +290,17 @@ export default {
           console.log(response);
           //this.$router.push("/view");
           //alert('บันทึกรอบการแสดงสำเร็จ')
-          this.Showtime.statuss2 = false;
+          if(response.status==200)
+          this.Showtime.statuss2 = true;
+          else 
+            this.Showtime.statuss2 = false;
+          
           this.clear();
         })
         .catch(e => {
           console.log(e);
-          this.Showtime.statuss2 = null;
         });
-      this.submitted = true;
+      //this.submitted = true;
     },
     clear(){
       this.$refs.form.reset();
