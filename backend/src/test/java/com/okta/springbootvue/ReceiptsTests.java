@@ -45,7 +45,7 @@ public class ReceiptsTests {
     }
 
     @Test
-    void B6001803_testPaymentTypeMustBeNotNull() { // Payment Type ห้ามว่าง
+    void B6015886_testPaymentTypeMustBeNotNull() { // Payment Type ห้ามว่าง
         Payment payment = new Payment();
         payment.setName(null);
 
