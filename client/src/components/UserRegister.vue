@@ -216,6 +216,15 @@
           CLEAR
         </v-btn>
         
+        <v-btn
+          v-on="on"
+          @click="back()"
+          color="indigo darken-3"
+          text
+        >
+          BACK
+        </v-btn>
+
       </v-card-actions>
       </v-row>
     
@@ -357,7 +366,10 @@ export default {
     }
     
   },
-  
+  back() {
+      this.$router.push("/")
+    },
+
     clear() {
       this.$refs.form.reset();
     },
