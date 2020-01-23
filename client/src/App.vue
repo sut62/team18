@@ -10,7 +10,6 @@
         &nbsp;
         <v-btn text href="/booking/" target="_self" class="white--text">Booking</v-btn>
         <v-btn text href="/cancel" target="_self" class="white--text">Cancel Booking</v-btn>
-        <v-btn text href="/viewbooking/" target="_self" class="white--text">View Booking History</v-btn>
         <v-btn @click="logOut" text target="_self" class="white--text">LOGOUT    </v-btn>
         <span class="white--text" >{{this.ids}}</span>
         </v-toolbar-title>
