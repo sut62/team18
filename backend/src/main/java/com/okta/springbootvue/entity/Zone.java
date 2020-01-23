@@ -2,6 +2,8 @@ package com.okta.springbootvue.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -23,6 +25,8 @@ public class Zone {
         private String zone;
 
         @NotNull
+        @Min(value = 100, message = "must more than or equal 100")
+        @Max(value = 8000, message = "must less than or equal 8000")
         @Column(name = "PRICE")
         private int price;
 

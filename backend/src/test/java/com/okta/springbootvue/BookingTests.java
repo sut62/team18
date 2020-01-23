@@ -97,24 +97,18 @@ public class BookingTests {
     }
 
     @Test
-    void B6001803_testSeatNumberMustLessThan999() { //seat number ต้องมีตัวเลขความยาว 2-4 ตัวเท่านั้น
+    void B6001803_testPriceMustLessThanOrEqual8000() { // ราคาที่นั่งในแต่ละโซนต้องมีค่าน้อยกว่าหรือเท่ากับ 8000
         
         Zone zone = new Zone();
         zone.setName("C");
-        zone.setPrice(1500);
-        zone = zoneRepository.saveAndFlush(zone);
+        zone.setPrice(15000);
 
-        Seat seat = new Seat();
-        seat.setSeatNum("C519465");
-        seat.setStatus("N");
-        seat.setChooseSeat(zone);
-
-        Set<ConstraintViolation<Seat>> result = validator.validate(seat);
+        Set<ConstraintViolation<Zone>> result = validator.validate(zone);
 
         assertEquals(1, result.size());
 
-        ConstraintViolation<Seat> v = result.iterator().next();
-        assertEquals("must match [A-Z]\\d{2,4}", v.getMessage());
-        assertEquals("seat_no", v.getPropertyPath().toString());
+        ConstraintViolation<Zone> v = result.iterator().next();
+        assertEquals("must less than or equal 8000", v.getMessage());
+        assertEquals("price", v.getPropertyPath().toString());
     }
 }

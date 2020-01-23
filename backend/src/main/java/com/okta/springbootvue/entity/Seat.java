@@ -18,7 +18,7 @@ public class Seat {
     private @NonNull Long id;
 
     @NotNull
-    @Pattern(regexp = "[A-Z]\\d{2,4}", message = "must match [A-Z]\\d{2,4}")
+    @Pattern(regexp = "[A-Z]\\d{2}", message = "must match [A-Z]\\d{2}")
     @Column(name = "SEAT_NO")
     private String seat_no;
 
