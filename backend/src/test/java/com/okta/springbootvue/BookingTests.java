@@ -75,28 +75,6 @@ public class BookingTests {
     }
 
     @Test
-    void B6001803_testSeatNumberMustBe1CharAnd2Digits() { // seat number ต้องมี 1 ตัวอักษรและ 2 ตัวเลข
-
-        Zone zone = new Zone();
-        zone.setName("C");
-        zone.setPrice(1500);
-        zone = zoneRepository.saveAndFlush(zone);
-
-        Seat seat = new Seat();
-        seat.setSeatNum("C1");
-        seat.setStatus("N");
-        seat.setChooseSeat(zone);
-
-        Set<ConstraintViolation<Seat>> result = validator.validate(seat);
-
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Seat> v = result.iterator().next();
-        assertEquals("must match [A-Z]\\d{2}", v.getMessage());
-        assertEquals("seat_no", v.getPropertyPath().toString());
-    }
-
-    @Test
     void B6001803_testSeatStatusMustBeYorN() { //seat status ต้องเป็น Y หรือ N เท่านั้น
         
         Zone zone = new Zone();
@@ -118,4 +96,25 @@ public class BookingTests {
         assertEquals("seat_status", v.getPropertyPath().toString());
     }
 
+    @Test
+    void B6001803_testSeatNumberMustLessThan999() { //seat number ต้องมีตัวเลขความยาว 2-4 ตัวเท่านั้น
+        
+        Zone zone = new Zone();
+        zone.setName("C");
+        zone.setPrice(1500);
+        zone = zoneRepository.saveAndFlush(zone);
+
+        Seat seat = new Seat();
+        seat.setSeatNum("C519465");
+        seat.setStatus("N");
+        seat.setChooseSeat(zone);
+
+        Set<ConstraintViolation<Seat>> result = validator.validate(seat);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Seat> v = result.iterator().next();
+        assertEquals("must match [A-Z]\\d{2,4}", v.getMessage());
+        assertEquals("seat_no", v.getPropertyPath().toString());
+    }
 }
