@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//
+
 @CrossOrigin(origins = "http://localhost:8082")
 @RestController
 public class ViewBookingController {
@@ -20,4 +22,5 @@ public class ViewBookingController {
     ViewBookingController(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
+
 }
