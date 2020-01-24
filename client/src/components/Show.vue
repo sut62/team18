@@ -188,9 +188,9 @@ export default {
       this.submitted = true;
     },
     refreshList() {
-      this.getBookings();
       this.getEmployees();
-      this.getPayments();
+      this.getRatingshows();
+      this.getShowtypes();
     }
     /* eslint-enable no-console */
   },
