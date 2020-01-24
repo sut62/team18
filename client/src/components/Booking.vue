@@ -9,7 +9,7 @@
       <v-layout text-center wrap>
         <v-flex mb-4>
           <v-col></v-col>
- 
+
           <!-- show -->
           <v-form v-model="validshow" ref="form">
             <v-row justify="center">
@@ -56,8 +56,8 @@
                 </v-col>
               </v-card-title>
 
+              <!-- showtime -->
               <v-form v-model="validshowtime" ref="form">
-                <!-- showtime -->
                 <v-row justify="center">
                   <v-col cols="auto">
                     <v-select
@@ -72,100 +72,108 @@
                       :rules="[(v) => !!v || '*กรุณาเลือกรอบการแสดง']"
                       required
                     ></v-select>
-                  <v-col>
-                      <div align="center">
-                    <v-btn
-                      rounded
-                      @click="showDatetime"
-                      :class="{ error: !validshowtime, success: validshowtime }"
-                    >ค้นหาเวลาการแสดง</v-btn>
-                      </div>
-                  </v-col>
-
-                  <!-- time -->
-                    <v-select
-                  id="b-time"
-                      label="รอบการแสดง"
-                      solo
-                      v-model="booking.timeId"
-                      :items="showtimesDate"
-                      item-text="time.time"
-                      item-value="id"
-                      
-                      :rules="[(v) => !!v || '*กรุณาเลือกรอบการแสดง']"
-                      required
-                    ></v-select>
-
-                    <!-- button show zone -->
-                    <div align="center">
-                      <v-btn
-                        rounded
-                        @click="showZone"
-                        :class="{ error: !validshowtime, success: validshowtime }"
-                      >ค้นหาโซน</v-btn>
-                    </div>
-                  </v-col>
-                </v-row>
-              </v-form>
-              <v-col></v-col>
-
-              <!-- zone -->
-              <div v-if="this.getZoneCheck">
-                <v-form v-model="validzone" ref="form">
-                  <v-row justify="center">
-                    <v-col cols="auto">
-                      <v-select
-                  id="b-zone"
-                        v-model="booking.zoneId"
-                        :items="zones"
-                        item-text="zone"
-                        item-value="id"
-                        label="ที่นั่ง"
-                        placeholder="กรุณาเลือกโซน"
-                        hide-selected
-                        solo
-                        :rules="[(v) => !!v || '*กรุณาเลือกโซน']"
-                      ></v-select>
-
-                      <!-- button show seat-->
+                    <v-col>
                       <div align="center">
                         <v-btn
                           rounded
-                          @click="showSeat"
-                          :class="{ error: !validzone, success: validzone }"
-                        >ค้นหาที่นั่ง</v-btn>
+                          @click="showDatetime"
+                          :class="{ error: !validshowtime, success: validshowtime }"
+                        >ค้นหาเวลาการแสดง</v-btn>
                       </div>
                     </v-col>
-                  </v-row>
-                </v-form>
-                <v-col></v-col>
+                  </v-col>
+                </v-row>
+              </v-form>
 
-                <!-- seat -->
-                <div v-if="this.getSeatCheck">
+              <!-- time -->
+              <div v-if="this.getTimeCheck">
+                <v-form v-model="validtime" ref="form">
                   <v-row justify="center">
                     <v-col cols="auto">
                       <v-select
-                  id="b-seat"
-                        label="กรุณาเลือกที่นั่ง"
+                        id="b-time"
+                        label="รอบการแสดง"
                         solo
-                        v-model="booking.seatId"
-                        :items="seats"
-                        item-text="seat_no"
+                        v-model="booking.timeId"
+                        :items="showtimesDate"
+                        item-text="time.time"
                         item-value="id"
+                        :rules="[(v) => !!v || '*กรุณาเลือกรอบการแสดง']"
+                        required
                       ></v-select>
+
+                      <!-- button show zone -->
+                      <v-col>
+                        <div align="center">
+                          <v-btn
+                            rounded
+                            @click="showZone"
+                            :class="{ error: !validtime, success: validtime }"
+                          >ค้นหาโซน</v-btn>
+                        </div>
+                      </v-col>
                     </v-col>
                   </v-row>
+                </v-form>
 
-                  <!-- submit -->
-                  <div align="center">
-                    <v-btn dark large rounded @click="getInfo()" class="success">ยืนยันการจองตั๋ว</v-btn>
-                    <v-btn
-                      dark
-                      large
-                      rounded
-                      @click="getShowtimeCheck = !getShowtimeCheck"
-                      class="error"
-                    >ยกเลิก</v-btn>
+                <!-- zone -->
+                <div v-if="this.getZoneCheck">
+                  <v-form v-model="validzone" ref="form">
+                    <v-row justify="center">
+                      <v-col cols="auto">
+                        <v-select
+                          id="b-zone"
+                          v-model="booking.zoneId"
+                          :items="zones"
+                          item-text="zone"
+                          item-value="id"
+                          label="ที่นั่ง"
+                          placeholder="กรุณาเลือกโซน"
+                          hide-selected
+                          solo
+                          :rules="[(v) => !!v || '*กรุณาเลือกโซน']"
+                        ></v-select>
+
+                        <!-- button show seat-->
+                        <div align="center">
+                          <v-btn
+                            rounded
+                            @click="showSeat"
+                            :class="{ error: !validzone, success: validzone }"
+                          >ค้นหาที่นั่ง</v-btn>
+                        </div>
+                      </v-col>
+                    </v-row>
+                  </v-form>
+                  <v-col></v-col>
+
+                  <!-- seat -->
+                  <div v-if="this.getSeatCheck">
+                    <v-row justify="center">
+                      <v-col cols="auto">
+                        <v-select
+                          id="b-seat"
+                          label="กรุณาเลือกที่นั่ง"
+                          solo
+                          v-model="booking.seatId"
+                          :items="seats"
+                          item-text="seat_no"
+                          item-value="id"
+                        ></v-select>
+                      </v-col>
+                    </v-row>
+
+                    <!-- submit -->
+                    <div align="center">
+                      <v-btn dark large rounded @click="getInfo()" class="success">ยืนยันการจองตั๋ว</v-btn>
+                      <v-btn
+                        dark
+                        large
+                        rounded
+                        @click="getShowtimeCheck = !getShowtimeCheck"
+                        class="error"
+                      >ยกเลิก</v-btn>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -240,9 +248,11 @@ export default {
       zones: [],
       validzone: false,
       validshow: false,
+      validtime: false,
       validshowtime: false,
       getSeatCheck: false,
       getZoneCheck: false,
+      getTimeCheck: false,
       getShowtimeCheck: false,
       getConfirm: false,
       username: localStorage.getItem("siteUser"),
@@ -295,7 +305,7 @@ export default {
         .get("/showtimeD/showtimeid=" + this.booking.showId) /////////////
         .then(response => {
           this.showtimes = response.data;
-          
+
           console.log(response.data);
         })
         .catch(e => {
@@ -306,23 +316,22 @@ export default {
     },
     showDatetime() {
       http
-        .get("/showtime/showtimeid=" + this.booking.showtimeId)////////////
+        .get("/showtime/showtimeid=" + this.booking.showtimeId)
         .then(response => {
-          
           this.showDateString = response.data[0].showDate;
+          this.getTimeCheck = true;
           console.log(response.data);
           this.LastTime();
         })
         .catch(e => {
           console.log(e);
         });
-    },LastTime() {
+    },
+    LastTime() {
       http
-        .get("/showDatetime/showid=" + this.showDateString)////////////
+        .get("/showDatetime/showid=" + this.showDateString)
         .then(response => {
           this.showtimesDate = response.data;
-          
-          
           console.log(response.data);
         })
         .catch(e => {
