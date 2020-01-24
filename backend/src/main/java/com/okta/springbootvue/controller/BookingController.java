@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+
 import java.time.LocalDateTime;
 
 import com.okta.springbootvue.entity.*;
@@ -64,6 +68,12 @@ public class BookingController {
         bookingRepository.changeSeatStatus(seat_id);
 
         return bookingRepository.save(newBooking); // บันทึก Objcet ชื่อ Booking
+    }
+
+    @PostConstruct
+    public void init(){
+      // Setting Spring Boot SetTimeZone
+      TimeZone.setDefault(TimeZone.getTimeZone("ICT"));
     }
 
 }
