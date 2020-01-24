@@ -8,7 +8,7 @@ import CancelBooking from '../components/CancelBooking';
 import Show from '../components/Show';
 import Receipts from '../components/Receipts';
 import ViewBooking from '../components/ViewBooking';
-import ViewBooking from '../components/ViewCancelBooking';
+import ViewCancelBooking from '../components/ViewCancelBooking';
 
 Vue.use(Router);
 
