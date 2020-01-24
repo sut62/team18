@@ -10,12 +10,41 @@
         <v-flex mb-4></v-flex>
       </v-layout>
 
-      <v-row justify="center">
-        <v-col cols="12">
-          <p></p>
-          <v-data-table :headers="headers" :items="items" :items-per-page="10" class="elevation-1"></v-data-table>
-        </v-col>
-      </v-row>
+      <div v-if="this.haveBooking">
+        <v-card>
+        <v-card-title>
+          Username : {{username}}
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            prepend-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-card-title>
+            <v-data-table
+              :headers="headers"
+              :items="items"
+              :search="search"
+              :items-per-page="10"
+              class="elevation-1"
+            ></v-data-table>
+        </v-card>
+      </div>
+
+      <div v-if="this.noBooking">
+        <v-card-text
+          headline
+          align="left"
+          class="headline font--weight-medium deep-orange--text text--accent-4"
+        >Username : {{username}}</v-card-text>
+        <v-card-text
+          headline
+          align="center"
+          class="title font--weight-medium red--text text--darken-1"
+        >ไม่มีการจองตั๋วการแสดงก่อนหน้านี้</v-card-text>
+      </div>
     </v-container>
   </v-content>
 </template>
@@ -31,11 +60,12 @@ export default {
         {
           text: "Booking No.",
           align: "center",
+          sortable: false,
           filterable: false,
           value: "id"
         },
         {
-          text: "วันที่-เวลา",
+          text: "วันที่-เวลาที่จอง",
           filterable: false,
           value: "booking_time"
         },
@@ -48,14 +78,14 @@ export default {
         {
           text: "รอบวันการแสดง",
           align: "center",
-          sortable: false,
+          sortable: true,
           value: "chooseShowtime.showDate"
         },
-        
+
         {
           text: "รอบเวลาการแสดง",
           align: "center",
-          sortable: false,
+          sortable: true,
           value: "time.time"
         },
         {
@@ -73,11 +103,14 @@ export default {
         {
           text: "ราคา (บาท)",
           align: "center",
-          sortable: false,
+          sortable: true,
           value: "chooseSeat.seatInZone.price"
-        },
+        }
       ],
-      items: []
+      items: [],
+      username: localStorage.getItem("siteUser"),
+      haveBooking: false,
+      noBooking: false
     };
   },
   methods: {
@@ -86,7 +119,12 @@ export default {
       http
         .get("/booking")
         .then(response => {
-          this.items = response.data;
+          if (response.data[0] != null) {
+            this.items = response.data;
+            this.haveBooking = true;
+          } else {
+            this.noBooking = true;
+          }
           console.log(this.items);
         })
         .catch(e => {
