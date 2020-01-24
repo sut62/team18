@@ -68,8 +68,7 @@ void B6004408_testMustBeNull(){
 
 
     @Test
-
-void B6004408_testMustBeMin(){
+    void B6004408_testMustBeMin(){
     LocalDateTime now = LocalDateTime.now();
 
     CancelBooking b = new CancelBooking();
@@ -80,7 +79,7 @@ void B6004408_testMustBeMin(){
         assertEquals(1, result.size());
 
     ConstraintViolation<CancelBooking> v = result.iterator().next();
-        assertEquals("ERROR", v.getMessage());
+        assertEquals("ERROR MIN", v.getMessage());
         assertEquals("Ans", v.getPropertyPath().toString());
     }
 
@@ -97,7 +96,7 @@ void B6004408_testMustBeMin(){
             assertEquals(1, result.size());
     
         ConstraintViolation<CancelBooking> v = result.iterator().next();
-            assertEquals("ERROR", v.getMessage());
+            assertEquals("ERROR MAX", v.getMessage());
             assertEquals("Ans", v.getPropertyPath().toString());
         }
 

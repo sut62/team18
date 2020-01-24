@@ -43,7 +43,8 @@ public class CancelBooking {
     private @NonNull Long id;
     
 
-  @Size(min = 2, max = 30, message = "ERROR")
+  @Size(min = 2, message = "ERROR MIN")
+  @Size(max = 30, message = "ERROR MAX")
     private @NotNull String Ans;
     
  @Column(name="DATE")
