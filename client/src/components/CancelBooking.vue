@@ -15,6 +15,7 @@
         <font color="yellow-text lighten-1"><v-card-title>     CancelBooking    </v-card-title> </font>
       </v-row>
       </v-img>
+      
 <v-form ref="form">
        <v-row justify="center">
          
@@ -199,7 +200,7 @@ export default {
         reasons : [],
         bookings : [],
         users:[],
-        a : localStorage.getItem("siteId"),
+        idUser : localStorage.getItem("siteId"),
         dialog : false,
         cdialog : false,
     };
@@ -252,7 +253,7 @@ export default {
   //กดปุ่ม check
     check(){
       http
-        .get("/userregister/id="+this.a)
+        .get("/userregister/id="+this.idUser)
         .then(response => {
           this.User = response.data;
            if(this.User[0].question.id == this.cancelBooking.questionId && this.User[0].answer == this.answer){
@@ -282,7 +283,7 @@ export default {
             "/" +
             this.cancelBooking.reasonId +
             "/"+
-            this.a +
+            this.idUser +
              "/"+
             this.answer,
             {}
