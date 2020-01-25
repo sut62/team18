@@ -7,6 +7,7 @@ import UserRegister from '../components/UserRegister';
 import Booking from '../components/Booking';
 import CancelBooking from '../components/CancelBooking';
 import Show from '../components/Show';
+import Showlist from '../components/Showlist';
 import Receipts from '../components/Receipts';
 import ViewBooking from '../components/ViewBooking';
 import ViewCancelBooking from '../components/ViewCancelBooking';
@@ -66,6 +67,10 @@ export default new Router({
     {
         path: '/viewshowtime',
         component: ViewShowtime 
+    },
+    {
+        path: '/showlist',
+        component: Showlist
     }
     ]
 });
