@@ -22,7 +22,8 @@
         &nbsp;
         <v-btn text href="/show/" target="_self" class="white--text">Show</v-btn>
         <v-btn text href="/showtime" target="_self" class="white--text">Showtime</v-btn>
-        <v-btn text href="/receipt" target="_self" class="white--text">Receipt</v-btn>
+        <v-btn text href="/receipts" target="_self" class="white--text">Receipt</v-btn>
+        <v-btn text href="/searchreceipts" target="_self" class="white--text">SearchReceipt</v-btn>
         <v-btn @click="logOut" text target="_self" class="white--text">LOGOUT    </v-btn>
         <span class="white--text" >{{this.nm}}</span>
         </v-toolbar-title>
