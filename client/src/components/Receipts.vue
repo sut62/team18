@@ -100,9 +100,9 @@ export default {
         employeeId: "",
         paymentId: ""
       },
-      employees: "",
-      bookings: "",
-      payments: "",
+      employees: [],
+      bookings: [],
+      payments: [],
     };
   },
   methods: {
@@ -163,7 +163,6 @@ export default {
           }).then(r => {
             console.log(r.value);
             window.location.reload();
-            //this.$router.push("/viewbooking");
           });
         })
         .catch(e => {
