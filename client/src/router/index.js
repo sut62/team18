@@ -9,6 +9,7 @@ import Show from '../components/Show';
 import Receipts from '../components/Receipts';
 import ViewBooking from '../components/ViewBooking';
 import ViewCancelBooking from '../components/ViewCancelBooking';
+import SearchReceipts from '../components/SearchReceipts';
 
 Vue.use(Router);
 
@@ -41,7 +42,7 @@ export default new Router({
         component: Show
     },
     {
-        path: '/receipt',
+        path: '/receipts',
         component: Receipts
     },
     {
@@ -51,6 +52,10 @@ export default new Router({
     {
         path: '/viewcancel',
         component: ViewCancelBooking
+    },
+    {
+        path: '/searchreceipts',
+        component: SearchReceipts
     }
     ]
 });
