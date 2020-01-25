@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>Search Receipts Test Suit</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">found</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8082/<datalist><option>http://localhost:8082/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=userName<datalist><option>id=userName</option><option>name=login</option><option>//input[@id='userName']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div/form/div/div/div/div/input</option><option>//input</option><option>css=#userName</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=userName<datalist><option>id=userName</option><option>name=login</option><option>//input[@id='userName']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div/form/div/div/div/div/input</option><option>//input</option><option>css=#userName</option></datalist></td><td>peter</td>
+</tr>
+<tr><td>click</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div/form/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#password</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div/form/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#password</option></datalist></td><td>1234</td>
+</tr>
+<tr><td>click</td><td>//button[@type='button']<datalist><option>//button[@type='button']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div[2]/button</option><option>//button</option><option>css=button.v-btn.v-btn--contained.theme--light.v-size--default</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/header/div/div/a[4]/span<datalist><option>//div[@id='app']/div/div/header/div/div/a[4]/span</option><option>//a[4]/span</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=emp_name<datalist><option>id=emp_name</option><option>//input[@id='emp_name']</option><option>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#emp_name</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=emp_name<datalist><option>id=emp_name</option><option>//input[@id='emp_name']</option><option>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#emp_name</option></datalist></td><td>1</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div/div[2]/div/button/span<datalist><option>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div/div[2]/div/button/span</option><option>//div[2]/div/button/span</option><option>css=button.v-btn.v-btn--depressed.theme--light.v-size--large.light-green.accent-4 &gt; span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div[2]/div/table/tbody/tr/td[2]<datalist><option>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div[2]/div/table/tbody/tr/td[2]</option><option>//td[2]</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div[2]/div/table/tbody/tr/td[2]<datalist><option>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div[2]/div/table/tbody/tr/td[2]</option><option>//td[2]</option></datalist></td><td>kim jisoo</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">not found</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8082/<datalist><option>http://localhost:8082/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=userName<datalist><option>id=userName</option><option>name=login</option><option>//input[@id='userName']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div/form/div/div/div/div/input</option><option>//input</option><option>css=#userName</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=userName<datalist><option>id=userName</option><option>name=login</option><option>//input[@id='userName']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div/form/div/div/div/div/input</option><option>//input</option><option>css=#userName</option></datalist></td><td>peter</td>
+</tr>
+<tr><td>click</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div/form/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#password</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div/form/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#password</option></datalist></td><td>1234</td>
+</tr>
+<tr><td>click</td><td>//button[@type='button']<datalist><option>//button[@type='button']</option><option>//div[@id='app']/div/main/div/div/div/div/div/div[2]/button</option><option>//button</option><option>css=button.v-btn.v-btn--contained.theme--light.v-size--default</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/header/div/div/a[4]/span<datalist><option>//div[@id='app']/div/div/header/div/div/a[4]/span</option><option>//a[4]/span</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=emp_name<datalist><option>id=emp_name</option><option>//input[@id='emp_name']</option><option>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#emp_name</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=emp_name<datalist><option>id=emp_name</option><option>//input[@id='emp_name']</option><option>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#emp_name</option></datalist></td><td>2</td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='app']/div/main/div/main/div/div[2]/div/form/div/div[2]/div/button</option><option>//div[2]/div/button</option><option>css=button.v-btn.v-btn--depressed.theme--light.v-size--large.light-green.accent-4</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=swal2-title<datalist><option>id=swal2-title</option><option>//h2[@id='swal2-title']</option><option>//h2</option><option>css=#swal2-title</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>id=swal2-title<datalist><option>id=swal2-title</option><option>//h2[@id='swal2-title']</option><option>//h2</option><option>css=#swal2-title</option></datalist></td><td>ไม่พบ Receipts ID นี้</td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[6]<datalist><option>xpath=(//button[@type='button'])[6]</option><option>//div[2]/div/div[3]/button</option><option>css=button.swal2-confirm.swal2-styled</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
