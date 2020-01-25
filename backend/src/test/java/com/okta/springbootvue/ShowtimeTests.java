@@ -210,5 +210,17 @@ public class ShowtimeTests {
         
         
     }
+    @Test
+    void b60001537_testTimNotempty(){
+        Time time = new Time();
+        time.setTime("");
+        Set<ConstraintViolation<Time>> result = validator.validate(time);
+        
+        assertEquals(1, result.size());
+        ConstraintViolation<Time> v = result.iterator().next();
+        assertEquals("must not be empty", v.getMessage());
+
+    
+    }
 
     }
