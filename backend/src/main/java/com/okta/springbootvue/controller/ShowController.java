@@ -47,9 +47,11 @@ public class ShowController {
         return show;
     }
 
-    @PostMapping("/show/{employee_id}/{ratingshow_id}/{showtype_id}/{title}")
+    @PostMapping("/show/{actor}/{employee_id}/{information}/{ratingshow_id}/{showtype_id}/{title}")
     public Show newShow(Show newShow,
+    @PathVariable String actor,
     @PathVariable long employee_id,
+    @PathVariable String information,
     @PathVariable long ratingshow_id,
     @PathVariable long showtype_id,
     @PathVariable String title) {
@@ -62,7 +64,8 @@ public class ShowController {
     newShow.setRatingshow(ratingshow);
     newShow.setShowtype(showtype);
     newShow.setTitle(title);
-    
+    newShow.setActor(actor);
+    newShow.setInformation(information);
     return showRepository.save(newShow); 
     
     }
