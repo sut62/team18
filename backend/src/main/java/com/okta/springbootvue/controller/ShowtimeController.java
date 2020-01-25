@@ -71,10 +71,7 @@ public class ShowtimeController {
         return showtimeRepository.findShowtimeByShowtime(show_id,time_id,location_id,showdate);
     }
 
-    @GetMapping("/showtime")
-    public Collection<Showtime> Showtimes() {
-        return showtimeRepository.findAll().stream().collect(Collectors.toList());
-    }
+  
 
     @PostMapping("/showtime/{show_id}/{time_id}/{location_id}/{showdate}")
     public Showtime newShowtime(Showtime newShowtime,
