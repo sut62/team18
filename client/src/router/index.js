@@ -56,6 +56,10 @@ export default new Router({
     {
         path: '/searchreceipts',
         component: SearchReceipts
+    },
+    {
+        path: '/viewuser',
+        component: ViewUser
     }
     ]
 });
