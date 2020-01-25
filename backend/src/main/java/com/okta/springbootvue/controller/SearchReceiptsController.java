@@ -23,13 +23,8 @@ public class SearchReceiptsController {
         this.receiptsRepository = receiptsRepository;
     }
 
-    @GetMapping("/searchReceipts")
-    public Collection<Receipts> Receipts() {
-        return receiptsRepository.findAll().stream().collect(Collectors.toList());
-    }
-
     @GetMapping("/receipts/{id}")
-    public Optional<Receipts> Receiptss(@PathVariable Long id) {
+    public Optional<Receipts> Receipts(@PathVariable Long id) {
         Optional<Receipts> receipts = receiptsRepository.findById(id);
         return receipts;
     }
