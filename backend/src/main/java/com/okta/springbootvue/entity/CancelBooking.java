@@ -10,7 +10,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import lombok.*;
 
@@ -45,9 +47,11 @@ public class CancelBooking {
 
   @Size(min = 2, message = "ERROR MIN")
   @Size(max = 30, message = "ERROR MAX")
+  @Pattern(regexp = "[A-Za-zก-๙1234567890]*", message = "Wrong Pattern")
     private @NotNull String Ans;
-    
- @Column(name="DATE")
+ 
+  @PastOrPresent
+  @Column(name="DATE")
    private @NotNull LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserRegister.class)
