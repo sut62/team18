@@ -8,7 +8,7 @@
     <v-row>
     <v-col cols="18">
     <v-form>
-            <v-row justify="center" style = "height: 70px;">
+            <v-row justify="center" style = "height: 65px;">
             <!-- ชื่อพนักงาน -->
               <v-col cols="3">
                 <v-select
@@ -24,11 +24,10 @@
                   prepend-icon="mdi-account"
                 ></v-select>
               </v-col>
-            </v-row>
+              </v-row>
 
-          <v-row justify="center" style = "height: 70px;">
-            <!-- กรอกชื่อการแสดง -->
-            <v-col cols="3">
+              <v-row justify="center" style = "height: 65px;">
+              <v-col cols="3">
               <v-text-field
                 id = "showname"
                 solo
@@ -38,10 +37,12 @@
                 required
                 prepend-icon="mdi-lead-pencil"
               ></v-text-field>
-            </v-col>    
-          </v-row>
+            </v-col>
+            </v-row>
 
-          <v-row justify="center" style = "height: 70px;">
+          
+
+          <v-row justify="center" style = "height: 65px;">
             <!-- ประเภทการแสดง -->
               <v-col cols="3">
                 <v-select
@@ -57,10 +58,10 @@
                   prepend-icon="mdi-play-circle"
                 ></v-select>
               </v-col>
-            </v-row>
+              </v-row>
 
-            <v-row justify="center" style = "height: 70px;">
-            <!-- เรทการแสดง -->
+              <v-row justify="center" style = "height: 65px;">
+              <!-- เรทการแสดง -->
               <v-col cols="3">
                 <v-select
                   id = "rate_show"
@@ -77,18 +78,47 @@
               </v-col>
             </v-row>
 
-
-          <v-row justify="center" style = "height: 45px;">
-            <v-col cols="12">
-              <v-btn color="red" style="margin-left: 45%;" @click="saveData">save</v-btn>
+            <v-row justify="center" style = "height: 65px;">
+            <!-- กรอกรายชื่อนักแสดง -->
+            <v-col cols="3">
+              <v-text-field
+                id = "actor"
+                solo
+                label="รายชื่อนักแสดง"
+                v-model="actor"
+                :rules="[(v) => !!v || 'This field is required']"
+                required
+                prepend-icon="mdi-account"
+              ></v-text-field>
             </v-col>
+            </v-row>   
+        
+
+            <v-row justify="center" style = "height: 65px;">
+            <!-- กรอกเนื้อเรื่องย่อ -->
+            <v-col cols="3">
+              <v-textarea
+                id = "show_list"
+                solo
+                label="เนื้อเรื่องย่อ"
+                v-model="information"
+                :rules="[(v) => !!v || 'This field is required']"
+                required
+                prepend-icon="mdi-account-card-details"
+              ></v-textarea>
+            </v-col>    
           </v-row>
+
+
+          <br><br><br><br>
+            <v-col cols="12">
+              <v-btn color="red" style="margin-left: 48%;" @click="saveData">save</v-btn>
+            </v-col>
+          
         </v-form>
       </v-col>
     </v-row>
     </v-container>
-  
-    
  
   </v-content>
 </template>
@@ -105,7 +135,9 @@ export default {
         ratingshowId: "",
         showtypeId: "",
       },
+        actor : "",
         title : "",
+        information : "",
         employees : "",
         ratingshows : "",
         showtypes : "",
@@ -157,15 +189,18 @@ export default {
       http
         .post(
           "/show/" +
-            
+            this.actor +
+            "/" +
             this.show.employeeId +
+            "/" +
+            this.information +
             "/" +
             this.show.ratingshowId +
             "/" +
             this.show.showtypeId +
-             "/" +
+            "/" +
             this.title,
-           
+        
             this.show
         )
         .then(response => {
