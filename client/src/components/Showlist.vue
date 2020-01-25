@@ -24,25 +24,20 @@ export default {
 
 
     headers: [{
-        text: "Show No.",
-        align: "left",
-        sortable: true,
-        value: "id"
-        },
-        {
-          text: "Show",
+        
+          text: "ชื่อการแสดง",
           align: "left",
           filterable: false,
           value: "title"
         },
         {
-          text: "Main Actors",
+          text: "รายชื่อนักแสดงหลัก",
           align: "left",
           filterable: false,
           value: "actor"
         },
         {
-          text: "Story",
+          text: "เนื้อเรื่องย่อ",
           align: "left",
           filterable: false,
           value: "information"
