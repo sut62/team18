@@ -4,7 +4,7 @@
       headline
       align="center"
       class="display-3 font--weight-bold blue darken-3 yellow--text text--lighten-1"
-    >RECEIPTS</v-card-text>
+    >SEARCH RECEIPTS</v-card-text>
 
     <v-row>
       <v-col cols="18">
@@ -16,37 +16,24 @@
                 id="emp_name"
                 label="Receipts ID"
                 solo
-                v-model="receipts.receiptsId"
-                :rules="[(v) => !!v || 'Item is required']"
+                v-model="search"
+                :rules="[(v) => !!v || 'กรุณาใส่ Receipts ID']"
                 required
               ></v-text-field>
             </v-col>
 
-            <p v-if="receiptsCheck != ''">
-              Receipts ID : {{receptsId}}
-              Receipts Date : {{receiptsDate}}
-            </p>
-
             <v-col cols="2">
               <div class="my-2">
-                <v-btn @click="findReceipts" depressed large color="primary">Search</v-btn>
+                <v-btn @click="findReceipts" depressed large color="light-green accent-4">Search</v-btn>
               </div>
             </v-col>
           </v-row>
-          <v-card class="mx-auto" max-width="344">
-              <v-card-text>
-                <div>Word of the Day</div>
-                <p class="display-1 text--primary">be•nev•o•lent</p>
-                <p>adjective</p>
-                <div class="text--primary">
-                  well meaning and kindly.
-                  <br />"a benevolent smile"
-                </div>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn text color="deep-purple accent-4">Learn More</v-btn>
-              </v-card-actions>
-            </v-card>
+          <br>
+          <v-data-table :headers="headers" 
+                        :items="items" 
+                        :items-per-page="5" 
+                        class="elevation-1">
+          </v-data-table>
         </v-form>
       </v-col>
     </v-row>
@@ -57,24 +44,46 @@
 import http from "../http-common";
 
 export default {
-  name: "receipts",
+  name: "searchReceipts",
   data() {
     return {
-      receipts: {
-        receiptsId: ""
-      },
-      receiptsCheck: false
+        search: "",
+        headers: [
+        { text: "ลำดับที่",sortable: false, value: "id" },
+        { text: "ชื่อคุณลูกค้า",sortable: false, value: "booking.chooseUser.name" },
+        { text: "ชื่อการแสดง",sortable: false, value: "booking.chooseShowtime.show.title" },
+        { text: "สถานที่",sortable: false, value: "booking.chooseShowtime.location.location" },
+        { text: "วันที่ทำการแสดง",sortable: false, value: "booking.chooseShowtime.showDate" },
+        { text: "เวลาทำการแสดง",sortable: false, value: "booking.chooseShowtime.time.time" },
+        { text: "โซนและเลขที่นั่ง",sortable: false, value: "booking.chooseSeat.seat_no" },
+        { text: "พนักงานผู้ออกใบเสร็จ",sortable: false, value: "employee.name" },
+      ],
+      items: [],
+      receiptsCheck: false,
+      receiptsId: ""
     };
   },
   methods: {
+    Checkdata() {
+      http
+        .get("/receipts/" + this.receiptsId)
+        .then(response => {
+          this.items = response.data;
+           console.log(this.items);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      
+    },
     // function ค้นหาใบเสร็จด้วย ID
     findReceipts() {
       http
-        .get("/receipts/" + this.receipts.receiptsId)
+        .get("/receipts/" + this.search)
         .then(response => {
           console.log(response);
           if (response.data != null) {
-            this.receiptsDate = response.data.receipts_datetime;
+            this.Checkdata();
             this.receiptsCheck = response.status;
           } else {
             this.clear();
@@ -82,7 +91,15 @@ export default {
         })
         .catch(e => {
           console.log(e);
-        });
+          this.$fire({
+            title: "ไม่พบ Receipts ID นี้",
+            text: "กรุณาใส่ Receipts ID ให้ถูกต้อง",
+            type: "error"
+          }).then(r => {
+            console.log(r.value);
+            window.location.reload();
+          });
+        })
       this.submitted = true;
     }
   }
