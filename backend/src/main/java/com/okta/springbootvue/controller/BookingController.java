@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 import com.okta.springbootvue.entity.*;
 import com.okta.springbootvue.repository.*;
@@ -52,13 +55,16 @@ public class BookingController {
     // save booking
     @PostMapping("/booking/success/{user_id}-{showtime_id}-{seat_id}-{time_id}")
     public Booking newBooking(Booking newBooking, @PathVariable long user_id, @PathVariable long showtime_id,
-            @PathVariable long seat_id,@PathVariable long time_id) {
+            @PathVariable long seat_id, @PathVariable long time_id) {
 
         UserRegister chooseUser = userRepository.findById(user_id);
         Showtime chooseShowtime = showtimeRepository.findById(showtime_id);
         Seat chooseSeat = seatRepository.findById(seat_id);
         Time time = timeRepository.findById(time_id);
-        LocalDateTime booking_time = LocalDateTime.now();
+        ZonedDateTime utcZoned = ZonedDateTime.of(LocalDateTime.now(), ZoneOffset.UTC);
+        ZoneId swissZone = ZoneId.of("Asia/Bangkok");
+        ZonedDateTime swissZoned = utcZoned.withZoneSameInstant(swissZone);
+        LocalDateTime booking_time = swissZoned.toLocalDateTime();
 
         newBooking.setChooseUser(chooseUser); // user
         newBooking.setChooseShowtime(chooseShowtime); // showtime
@@ -69,11 +75,11 @@ public class BookingController {
 
         return bookingRepository.save(newBooking); // บันทึก Objcet ชื่อ Booking
     }
-
+/*
     @PostConstruct
-    public void init(){
-      // Setting Spring Boot SetTimeZone
-      TimeZone.setDefault(TimeZone.getTimeZone("ICT"));
+    public void init() {
+        // Setting Spring Boot SetTimeZone
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+7"));
     }
-
+*/
 }
