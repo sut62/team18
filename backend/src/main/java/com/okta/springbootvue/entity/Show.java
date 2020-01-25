@@ -5,11 +5,8 @@ import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-//import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-//import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,9 +24,15 @@ public class Show {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SHOW_SEQ")
     @Column(name="SHOW_ID",unique = true, nullable = true)
     private @NonNull Long id;
+
+    @Column(name="Actor")
+    private @NonNull String actor;
     
     @Column(name="Title")
     private @NonNull String title;
+
+    @Column(name="Information")
+    private @NonNull String information;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
@@ -42,6 +45,8 @@ public class Show {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Showtype.class)
     @JoinColumn(name = "SHOWTYPE_ID", insertable = true)
     private Showtype showtype;
+
+    
 
     public void setEmployee(Employee employee2) {
         this.employee=employee2;
@@ -58,4 +63,12 @@ public class Show {
     public void setTitle(String title2) {
         this.title=title2;
     }
+
+    public void setInformation (String information2) {
+        this.information=information2;
+    }
+
+	public void setActor(String actor2) {
+        this.actor=actor2;
+	}
 }
