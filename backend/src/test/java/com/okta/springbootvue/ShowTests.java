@@ -60,7 +60,7 @@ public class ShowTests {
     @Test
     void B6015800_testShowtypeMustBeGreaterEqual3() {
         Showtype showtype = new Showtype();
-        showtype.setShname("123");
+        showtype.setShname("12");
 
         Set<ConstraintViolation<Showtype>> result = validator.validate(showtype);
 
@@ -73,7 +73,7 @@ public class ShowTests {
     @Test
     void B6015800_testShowtypeMustBeLessEqual9() {
         Showtype showtype = new Showtype();
-        showtype.setShname("123456789");
+        showtype.setShname("1234567890");
 
         Set<ConstraintViolation<Showtype>> result = validator.validate(showtype);
 
