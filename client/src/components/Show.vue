@@ -31,7 +31,7 @@
               <v-text-field
                 id = "showname"
                 solo
-                label="กรอกชื่อการแสดง"
+                label="ชื่อการแสดง"
                 v-model="title"
                 :rules="[(v) => !!v || 'This field is required']"
                 required
@@ -84,7 +84,7 @@
               <v-text-field
                 id = "actor"
                 solo
-                label="รายชื่อนักแสดง"
+                label="รายชื่อนักแสดงหลัก"
                 v-model="actor"
                 :rules="[(v) => !!v || 'This field is required']"
                 required
