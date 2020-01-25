@@ -22,7 +22,18 @@
               ></v-text-field>
             </v-col>
 
-            <v-card class="mx-auto" max-width="344">
+            <p v-if="receiptsCheck != ''">
+              Receipts ID : {{receptsId}}
+              Receipts Date : {{receiptsDate}}
+            </p>
+
+            <v-col cols="2">
+              <div class="my-2">
+                <v-btn @click="findReceipts" depressed large color="primary">Search</v-btn>
+              </div>
+            </v-col>
+          </v-row>
+          <v-card class="mx-auto" max-width="344">
               <v-card-text>
                 <div>Word of the Day</div>
                 <p class="display-1 text--primary">be•nev•o•lent</p>
@@ -36,18 +47,6 @@
                 <v-btn text color="deep-purple accent-4">Learn More</v-btn>
               </v-card-actions>
             </v-card>
-
-            <p v-if="receiptsCheck != ''">
-              Receipts ID : {{receptsId}}
-              Receipts Date : {{receiptsDate}}
-            </p>
-
-            <v-col cols="2">
-              <div class="my-2">
-                <v-btn @click="findReceipts" depressed large color="primary">Search</v-btn>
-              </div>
-            </v-col>
-          </v-row>
         </v-form>
       </v-col>
     </v-row>
