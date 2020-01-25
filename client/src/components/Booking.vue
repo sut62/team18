@@ -44,7 +44,6 @@
             <v-card color="grey lighten-3">
               <v-card-title>
                 {{showname}}
-                {{this.showDateString}}
                 <v-col align="right">
                   <v-btn
                     outlined
@@ -62,14 +61,14 @@
                   <v-col cols="auto">
                     <v-select
                       id="b-showtime"
-                      label="รอบการแสดง"
+                      label="รอบวันการแสดง"
                       solo
                       v-model="booking.showtimeId"
                       :items="showtimes"
                       item-text="showDate"
                       item-value="id"
                       hide-selected
-                      :rules="[(v) => !!v || '*กรุณาเลือกรอบการแสดง']"
+                      :rules="[(v) => !!v || '*กรุณาเลือกรอบวันการแสดง']"
                       required
                     ></v-select>
                     <v-col>
@@ -92,13 +91,13 @@
                     <v-col cols="auto">
                       <v-select
                         id="b-time"
-                        label="รอบการแสดง"
+                        label="รอบเวลาการแสดง"
                         solo
                         v-model="booking.timeId"
                         :items="showtimesDate"
                         item-text="time.time"
                         item-value="id"
-                        :rules="[(v) => !!v || '*กรุณาเลือกรอบการแสดง']"
+                        :rules="[(v) => !!v || '*กรุณาเลือกรอบเวลาการแสดง']"
                         required
                       ></v-select>
 
@@ -190,8 +189,10 @@
                     <span class="indigo--text text--darken-4">{{username}}</span>
                     <br />การแสดง :
                     <span class="indigo--text text--darken-4">{{showname}}</span>
-                    <br />รอบการแสดง :
-                    <span class="indigo--text text--darken-4">{{this.booking.timeId}}</span>
+                    <br />รอบวันการแสดง :
+                    <span class="indigo--text text--darken-4">{{showDateString}}</span>
+                    <br />รอบเวลาการแสดง :
+                    <span class="indigo--text text--darken-4">{{timeString}}</span>
                     <br />โซน :
                     <span class="indigo--text text--darken-4">{{zone}}</span>
                     <br />ที่นั่ง :
@@ -258,6 +259,7 @@ export default {
       username: localStorage.getItem("siteUser"),
       showname: "",
       showtime: "",
+      timeString: "",
       zone: "",
       price: "",
       seat: "",
@@ -305,7 +307,6 @@ export default {
         .get("/showtimeD/showtimeid=" + this.booking.showId) /////////////
         .then(response => {
           this.showtimes = response.data;
-
           console.log(response.data);
         })
         .catch(e => {
@@ -319,6 +320,7 @@ export default {
         .get("/showtime/showtimeid=" + this.booking.showtimeId)
         .then(response => {
           this.showDateString = response.data[0].showDate;
+          this.timeString = response.data[0].time.time;
           this.getTimeCheck = true;
           console.log(response.data);
           this.LastTime();
@@ -332,6 +334,7 @@ export default {
         .get("/showDatetime/showid=" + this.showDateString)
         .then(response => {
           this.showtimesDate = response.data;
+          this.timeString = response.data.time.time;
           console.log(response.data);
         })
         .catch(e => {
@@ -463,8 +466,10 @@ export default {
             title: "จองตั๋วสำเร็จ",
             text:
               this.showname +
-              " รอบ " +
-              this.showtime +
+              " รอบวัน " +
+              this.showDateString +
+              " รอบเวลา " +
+              this.timeString +
               " โซน " +
               this.zone +
               " ที่นั่ง " +
@@ -474,7 +479,6 @@ export default {
           }).then(r => {
             console.log(r.value);
             window.location.reload();
-            //this.$router.push("/viewbooking");
           });
         })
         .catch(e => {
@@ -491,9 +495,6 @@ export default {
     /* eslint-enable no-console */
   },
   mounted() {
-    this.getSeats();
-    this.getZones();
-    this.getShowtimes();
     this.getShows();
   }
 };

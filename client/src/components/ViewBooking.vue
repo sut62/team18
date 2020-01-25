@@ -4,7 +4,7 @@
       headline
       align="center"
       class="display-3 font--weight-bold blue darken-3 yellow--text text--lighten-1"
-    >View Booking History</v-card-text>
+    >Booking History</v-card-text>
     <v-container>
       <v-layout text-center wrap>
         <v-flex mb-4></v-flex>
@@ -34,16 +34,17 @@
       </div>
 
       <div v-if="this.noBooking">
+        <v-card>
         <v-card-text
           headline
           align="left"
-          class="headline font--weight-medium deep-orange--text text--accent-4"
+          class="headline font--weight-medium black--text text--accent-4"
         >Username : {{username}}</v-card-text>
         <v-card-text
-          headline
           align="center"
-          class="title font--weight-medium red--text text--darken-1"
+          class="headline font--weight-medium red--text text--darken-3"
         >ไม่มีการจองตั๋วการแสดงก่อนหน้านี้</v-card-text>
+        </v-card>
       </div>
     </v-container>
   </v-content>
@@ -108,6 +109,7 @@ export default {
         }
       ],
       items: [],
+      userId: localStorage.getItem("siteId"),
       username: localStorage.getItem("siteUser"),
       haveBooking: false,
       noBooking: false
@@ -117,7 +119,7 @@ export default {
     /* eslint-disable no-console */
     getBookings() {
       http
-        .get("/booking")
+        .get("/bookingby/" + this.userId)
         .then(response => {
           if (response.data[0] != null) {
             this.items = response.data;
