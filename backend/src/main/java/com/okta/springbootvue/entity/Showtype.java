@@ -7,10 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
-
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.util.Collection;
 
@@ -28,13 +29,22 @@ public class Showtype {
 	@Column(name="SHOWTYPE_ID",unique = true, nullable = true)
 	private @NonNull Long id;
 
-	private @NonNull String shname;
-
+	@NotNull
+    @Size(min = 3, max = 9)
+	private String shname;
+	
 	//@OneToMany(fetch = FetchType.EAGER)
-	// mappedBy  = "rentCustomer"
 	//private Collection<Show> show;
 
 	public void setName(String name) {
 		this.shname = name;
+	}
+
+	public Object getName() {
+		return this.shname;
+	}
+
+	public Long getId() {
+		return this.id;
 	}
 }
