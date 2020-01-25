@@ -1,6 +1,5 @@
 package com.okta.springbootvue.controller;
 import com.okta.springbootvue.repository.ShowRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
