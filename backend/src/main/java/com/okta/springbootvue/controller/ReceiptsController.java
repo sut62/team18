@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.*;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -45,11 +47,16 @@ public class ReceiptsController {
     Employee employee = employeeRepository.findById(employee_id);	
     Booking booking = bookingRepository.findById(booking_id);
     Payment payment = paymentRepository.findById(payment_id);
+    
+    ZonedDateTime utcZoned = ZonedDateTime.of(LocalDateTime.now(), ZoneOffset.UTC);
+    ZoneId thZone = ZoneId.of("Asia/Bangkok");
+    ZonedDateTime thZoned = utcZoned.withZoneSameInstant(thZone);
+    LocalDateTime receipts_datetime = thZoned.toLocalDateTime();
 
     newReceipts.setCreatedBy(employee);
     newReceipts.setBooking(booking);
     newReceipts.setPayment(payment);
-    newReceipts.setReceipts_datetime(new Date());
+    newReceipts.setReceiptsDatetime(receipts_datetime);
 
     return receiptsRepository.save(newReceipts); 
     }
