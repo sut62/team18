@@ -35,7 +35,7 @@ public class Receipts {
 
         @NotNull
         @Column(name = "RECEIPTS_DATETIME")
-        private String receipts_datetime;
+        private LocalDateTime receipts_datetime;
 
         @NotNull
         @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
@@ -64,10 +64,8 @@ public class Receipts {
                 this.booking = booking;
         }
 
-        public void setReceiptsDatetime(LocalDateTime myDateObj) {
-                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss น.");
-                String formattedDate = myDateObj.format(myFormatObj);
-                receipts_datetime = formattedDate;
+        public void setReceiptsDatetime(LocalDateTime receipts_datetime) {
+                this.receipts_datetime =receipts_datetime;
         }
 
 }

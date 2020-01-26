@@ -48,10 +48,9 @@ public class ReceiptsController {
     Booking booking = bookingRepository.findById(booking_id);
     Payment payment = paymentRepository.findById(payment_id);
     
-    ZonedDateTime utcZoned = ZonedDateTime.of(LocalDateTime.now(), ZoneOffset.UTC);
-    ZoneId thZone = ZoneId.of("Asia/Bangkok");
-    ZonedDateTime thZoned = utcZoned.withZoneSameInstant(thZone);
-    LocalDateTime receipts_datetime = thZoned.toLocalDateTime();
+    ZoneId z = ZoneId.of( "Asia/Bangkok" ) ; 
+    ZonedDateTime zdt = ZonedDateTime.now( z ) ;
+    LocalDateTime receipts_datetime = zdt.toLocalDateTime();
 
     newReceipts.setCreatedBy(employee);
     newReceipts.setBooking(booking);
