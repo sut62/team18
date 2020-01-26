@@ -117,7 +117,7 @@ export default {
               this.k = this.idz[0].name;
               
               localStorage.setItem("sitePass", this.k);
-              localStorage.setItem("empid", this.ch);
+             //localStorage.setItem("siteUser", this.k);
             
             this.$router.push("/show");
             window.location.reload();
