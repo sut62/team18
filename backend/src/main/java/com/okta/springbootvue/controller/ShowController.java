@@ -61,7 +61,7 @@ public class ShowController {
     Showtype showtype = showtypeRepository.findById(showtype_id);
     
     newShow.setEmployee(employee);
-    newShow.setRatingshow(ratingshow);
+    newShow.setShowtype(showtype);
     newShow.setShowtype(showtype);
     newShow.setTitle(title);
     newShow.setActor(actor);
