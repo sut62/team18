@@ -62,7 +62,7 @@ public class ShowController {
     
     newShow.setEmployee(employee);
     newShow.setShowtype(showtype);
-    newShow.setShowtype(showtype);
+    newShow.setRatingshow(ratingshow);
     newShow.setTitle(title);
     newShow.setActor(actor);
     newShow.setInformation(information);
