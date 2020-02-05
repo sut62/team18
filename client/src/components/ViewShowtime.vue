@@ -3,7 +3,15 @@
      
       <v-col justify="center">
            <v-toolbar flat="" class="blue darken-3 yellow--text " >
-        <h1>SHOW TIME</h1>&nbsp;
+        <h1>SHOW TIME</h1> &nbsp;&nbsp;&nbsp;&nbsp;<span>Data : </span> 
+        &nbsp;
+        <div v-if="this.status">
+        <span>have data</span>
+        </div>
+        &nbsp;
+        <div v-if="this.status==false">
+        <span>no data</span>
+        </div>
        </v-toolbar>  
         <v-data-table
     
@@ -18,6 +26,7 @@
   </v-data-table>
 </v-col>
  </v-container>
+ 
  </template>
 <script>
 import http from "../http-common";
@@ -37,7 +46,8 @@ export default {
           { text: 'เรทติ้ง', value: 'show.ratingshow.rate' },
          
         ],
-        itemsz:[]
+        itemsz:[],
+        status :true
         };
         
     },
@@ -53,6 +63,9 @@ methods:{
     .then(response =>{
         this.itemsz = response.data;
         console.log(this.itemsz);
+        if(this.itemsz==""){
+          this.status=false;
+        }
     })
     .catch(e =>{
         console.log(e);
