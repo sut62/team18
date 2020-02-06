@@ -23,9 +23,8 @@ public class Booking {
 
     @NotNull
     @Column(name = "BOOKING_TIME")
-    private String booking_time;
+    private LocalDateTime booking_time;
    
-
     // *-1 with user
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserRegister.class)
@@ -58,10 +57,8 @@ public class Booking {
         chooseShowtime = showtime;
     }
 
-    public void setBookingTime(LocalDateTime myDateObj) {
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss น.");
-        String formattedDate = myDateObj.format(myFormatObj);
-        booking_time = formattedDate;
+    public void setBookingTime(LocalDateTime booking_time) {
+        this.booking_time = booking_time;
     }
 
     public void setChooseSeat(Seat chooseSeat) {
@@ -76,8 +73,8 @@ public class Booking {
 		return id;
 	}
 
-	public LocalDateTime getBookingTime(LocalDateTime bt) {
-        return bt;
+	public LocalDateTime getBookingTime() {
+        return booking_time;
 	}
 
 	public Seat getSeat() {

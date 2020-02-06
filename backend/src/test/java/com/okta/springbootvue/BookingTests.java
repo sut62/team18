@@ -129,7 +129,7 @@ public class BookingTests {
 
         Optional<Booking> found = bookingRepository.findById(booking.getId());
         assertEquals(booking, found.get());
-        assertEquals(booking_time, found.get().getBookingTime(booking_time));
+        assertEquals(booking_time, found.get().getBookingTime());
         assertEquals(seat, found.get().getSeat());
         assertEquals(showtime, found.get().getShowtime());
         assertEquals(userregister, found.get().getUser());

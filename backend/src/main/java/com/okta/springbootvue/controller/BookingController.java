@@ -61,6 +61,7 @@ public class BookingController {
         Showtime chooseShowtime = showtimeRepository.findById(showtime_id);
         Seat chooseSeat = seatRepository.findById(seat_id);
         Time time = timeRepository.findById(time_id);
+
         ZonedDateTime utcZoned = ZonedDateTime.of(LocalDateTime.now(), ZoneOffset.UTC);
         ZoneId swissZone = ZoneId.of("Asia/Bangkok");
         ZonedDateTime swissZoned = utcZoned.withZoneSameInstant(swissZone);
@@ -70,16 +71,9 @@ public class BookingController {
         newBooking.setChooseShowtime(chooseShowtime); // showtime
         newBooking.setChooseSeat(chooseSeat); // seat
         newBooking.setBookingTime(booking_time); // set date
-        newBooking.setTime(time);
+        newBooking.setTime(time); // time
         bookingRepository.changeSeatStatus(seat_id);
 
         return bookingRepository.save(newBooking); // บันทึก Objcet ชื่อ Booking
     }
-/*
-    @PostConstruct
-    public void init() {
-        // Setting Spring Boot SetTimeZone
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT+7"));
-    }
-*/
 }
