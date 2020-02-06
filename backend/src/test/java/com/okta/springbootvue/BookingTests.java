@@ -138,7 +138,7 @@ public class BookingTests {
     }
 
     @Test
-    void B6001803_testZoneNameMustNotBeNull() {
+    void B6001803_testZoneNameMustNotBeNull() { // ชื่อ zone ต้องไม่เป็นค่าว่าง
         Zone zone = new Zone();
         zone.setName(null);
         zone.setPrice(1500);
@@ -483,6 +483,70 @@ public class BookingTests {
         ConstraintViolation<Booking> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("time", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6001803_testSeatMustNotBeNull() throws ParseException{ // seat ต้องไม่เป็นค่าว่าง
+        Sex sex = sexRepository.findById(1);
+        Question question = questionRepository.findById(1);
+        TypeName typename = typenameRepository.findById(1);
+        UserRegister userregister = new UserRegister();
+        userregister.setSex(sex);
+        userregister.setQuestion(question);
+        userregister.setTypeName(typename);
+        userregister.setName("Kittichai Jitjaroen");
+        userregister.setTel("0901316436");
+        userregister.setEmail("mosmos11289@gmail.com");
+        userregister.setAnswer("Chanthaburi");
+        userregister.setPassword("Chanthaburi");
+        userregister = userregisterRepository.saveAndFlush(userregister);
+
+        Employee employee = employeeRepository.findById(1);
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        Showtype showtype = showtypeRepository.findById(1);
+        Show show = new Show();
+        show.setTitle("IU Concert");
+        show.setEmployee(employee);
+        show.setRatingshow(ratingshow);
+        show.setShowtype(showtype);
+        show = showRepository.saveAndFlush(show);
+
+        ShowLocation location = showLocationRepository.findById(1);
+        Time time = timeRepository.findById(1);
+        Showtime showtime = new Showtime();
+        showtime.setTime(time);
+        showtime.setShow(show);
+        showtime.setLocation(location);
+        String datetime = "2020-02-30";
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateT = df.parse(datetime);
+        showtime.setShowDate(dateT);
+        showtime = showtimeRepository.saveAndFlush(showtime);
+
+        Zone zone = new Zone();
+        zone.setName("C");
+        zone.setPrice(1500);
+        zone = zoneRepository.saveAndFlush(zone);
+
+        ZonedDateTime utcZoned = ZonedDateTime.of(LocalDateTime.now(), ZoneOffset.UTC);
+        ZoneId swissZone = ZoneId.of("Asia/Bangkok");
+        ZonedDateTime swissZoned = utcZoned.withZoneSameInstant(swissZone);
+        LocalDateTime booking_time = swissZoned.toLocalDateTime();
+
+        Booking booking = new Booking();
+        booking.setBookingTime(booking_time);
+        booking.setChooseSeat(null);
+        booking.setChooseShowtime(showtime);
+        booking.setChooseUser(userregister);
+        booking.setTime(time);
+
+        Set<ConstraintViolation<Booking>> result = validator.validate(booking);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Booking> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("chooseSeat", v.getPropertyPath().toString());
     }
 
 }
