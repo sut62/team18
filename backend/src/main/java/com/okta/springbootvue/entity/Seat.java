@@ -28,6 +28,7 @@ public class Seat {
     private String seat_status;
 
     // *-1 with zone
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Zone.class)
     @JoinColumn(name = "ZONE_ID", insertable = true)
     private Zone seatInZone;

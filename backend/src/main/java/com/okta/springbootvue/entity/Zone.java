@@ -25,7 +25,7 @@ public class Zone {
         private String zone;
 
         @NotNull
-        @Min(value = 100, message = "must more than or equal 100")
+        @Min(value = 100, message = "must greater than or equal 100")
         @Max(value = 8000, message = "must less than or equal 8000")
         @Column(name = "PRICE")
         private int price;
