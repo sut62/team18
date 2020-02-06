@@ -12,6 +12,15 @@
         <v-col cols-9 >
                 <v-data-table :headers="headers" :items="items" :items-per-page="15" class="elevation-1">
                 </v-data-table>
+
+                 <div v-if="alert1">
+                <v-alert type="success">พบข้อมูล</v-alert>
+              </div>
+
+              <div v-else-if="!alert1">
+                <v-alert type="error">ไม่พบข้อมูล</v-alert>
+              </div>
+
         </v-col>  
   </v-row>
  </v-container>
@@ -52,7 +61,18 @@ methods: {
         .get("/ViewCancel")
         .then(response => {
           this.items = response.data;
-         console.log(this.items);
+          if(this.items != "" ){
+            this.items = response.data;
+
+            this.alert1 = true;
+
+            console.log(response.data);
+            console.log("true");
+          }else {
+            this.alert1 = false;
+            console.log("false");
+
+          }
         })
         .catch(e => {
 
