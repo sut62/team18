@@ -303,7 +303,7 @@ public class BookingTests {
     }
 
     @Test
-    void B6001809_testUserMustNotBeNull() throws ParseException { // user ต้องไม่เป็นค่าว่าง
+    void B6001803_testUserMustNotBeNull() throws ParseException { // user ต้องไม่เป็นค่าว่าง
         Employee employee = employeeRepository.findById(1);
         Ratingshow ratingshow = ratingshowRepository.findById(1);
         Showtype showtype = showtypeRepository.findById(1);
@@ -358,7 +358,7 @@ public class BookingTests {
     }
 
     @Test
-    void B6001809_testShowtimeMustNotBeNull() { // showtime ต้องไม่เป็นค่าว่าง
+    void B6001803_testShowtimeMustNotBeNull() { // showtime ต้องไม่เป็นค่าว่าง
         Sex sex = sexRepository.findById(1);
         Question question = questionRepository.findById(1);
         TypeName typename = typenameRepository.findById(1);
@@ -417,7 +417,7 @@ public class BookingTests {
     }
 
     @Test
-    void B6001809_testTimeMustNotBeNull() throws ParseException{ // time ต้องไม่เป็นค่าว่าง
+    void B6001803_testTimeMustNotBeNull() throws ParseException{ // time ต้องไม่เป็นค่าว่าง
         Sex sex = sexRepository.findById(1);
         Question question = questionRepository.findById(1);
         TypeName typename = typenameRepository.findById(1);
