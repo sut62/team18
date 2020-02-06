@@ -1,6 +1,6 @@
 -ข้อแนะนำ-
 *โปรเจคนี้ ฝั่ง Cilent ใช้ Port : http://localhost:8082/
-*หาก yarn serve รันไม่ผ่าน ให้ใช้คำสั่ง  yarn upgrade ก่อน แล้วใช้คำสั่ง yarn serve อีกครั้ง
+*หาก yarn serve รันไม่ผ่าน ให้ใช้คำสั่ง  yarn upgrade หรือ yarn install ก่อน แล้วใช้คำสั่ง yarn serve อีกครั้ง
 
 #######
 
