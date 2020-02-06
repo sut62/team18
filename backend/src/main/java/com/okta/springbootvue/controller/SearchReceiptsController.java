@@ -1,6 +1,7 @@
 package com.okta.springbootvue.controller;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,10 +24,11 @@ public class SearchReceiptsController {
         this.receiptsRepository = receiptsRepository;
     }
 
-    @GetMapping("/receipts/{id}")
-    public Optional<Receipts> Receipts(@PathVariable Long id) {
-        Optional<Receipts> receipts = receiptsRepository.findById(id);
-        return receipts;
-    }
+        // ค้นหาจาก id
+        @GetMapping("/receipts/searchId={id}")
+        List<Receipts> getDetialsReceipts(@PathVariable long id) {
+            List<Receipts> re_id = receiptsRepository.findById(id);
+            return re_id;
+        }
 
 }

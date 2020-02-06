@@ -10,13 +10,13 @@
       <v-col cols="18">
         <v-form>
           <v-row justify="center" style="height: 70px;">
-            <!-- ชื่อพนักงาน -->
+            <!-- receipts id -->
             <v-col cols="3">
               <v-text-field
-                id="emp_name"
+                id="re_id"
                 label="Receipts ID"
                 solo
-                v-model="search"
+                v-model="searchId"
                 :rules="[(v) => !!v || 'กรุณาใส่ Receipts ID']"
                 required
               ></v-text-field>
@@ -47,7 +47,6 @@ export default {
   name: "searchReceipts",
   data() {
     return {
-        search: "",
         headers: [
         { text: "ลำดับที่",sortable: false, value: "id" },
         { text: "ชื่อคุณลูกค้า",sortable: false, value: "booking.chooseUser.name" },
@@ -59,49 +58,32 @@ export default {
         { text: "พนักงานผู้ออกใบเสร็จ",sortable: false, value: "employee.name" },
       ],
       items: [],
-      receiptsCheck: false,
-      receiptsId: ""
+      searchId: undefined,
     };
   },
   methods: {
-    Checkdata() {
-      http
-        .get("/receipts/" + this.receiptsId)
-        .then(response => {
-          this.items = response.data;
-           console.log(this.items);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-      
-    },
     // function ค้นหาใบเสร็จด้วย ID
     findReceipts() {
       http
-        .get("/receipts/" + this.search)
-        .then(response => {
-          console.log(response);
-          if (response.data != null) {
-            this.Checkdata();
-            this.receiptsCheck = response.status;
-          } else {
-            this.clear();
-          }
-        })
-        .catch(e => {
-          console.log(e);
-          this.$fire({
-            title: "ไม่พบ Receipts ID นี้",
-            text: "กรุณาใส่ Receipts ID ให้ถูกต้อง",
-            type: "error"
-          }).then(r => {
-            console.log(r.value);
-            window.location.reload();
-          });
-        })
-      this.submitted = true;
-    }
+            .get("/receipts/searchId=" + this.searchId)
+            .then(response  => {
+                this.items = response.data;
+                console.log(JSON.parse(JSON.stringify(response.data)));
+                if(this.items.length == 0) {
+                    this.$fire({
+                    title: "ไม่พบ Receipts ID นี้",
+                    type: "error"
+                    })
+                    .then(r => {
+                    console.log(r.value);
+                    window.location.reload();
+                    });
+                }
+            })
+          .catch(e => {
+            console.log("Error in findReceipts() :" + e);
+        });
+    },
   }
 };
 </script>
