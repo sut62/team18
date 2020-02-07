@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotEmpty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,27 +26,28 @@ public class Show {
     private @NonNull Long id;
 
     @Column(name="Actor")
-    private @NonNull String actor;
+    private String actor;
     
+    @NotEmpty
     @Column(name="Title")
-    private @NonNull String title;
+    private String title;
 
     @Column(name="Information")
-    private @NonNull String information;
+    private String information;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
     private Employee employee;
 
+    
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Ratingshow.class)
     @JoinColumn(name = "RATINGSHOW_ID", insertable = true)
     private Ratingshow ratingshow;
 
+    
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Showtype.class)
     @JoinColumn(name = "SHOWTYPE_ID", insertable = true)
     private Showtype showtype;
-
-    
 
     public void setEmployee(Employee employee2) {
         this.employee=employee2;
