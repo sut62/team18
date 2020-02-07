@@ -60,6 +60,8 @@ public class ShowtimeTests {
         showtype = showtypeRepository.saveAndFlush(showtype);
         Show show = new Show();
         show.setTitle("IU Consert");
+        show.setActor("NameActor");
+        show.setInformation("title has be test");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
@@ -99,6 +101,8 @@ public class ShowtimeTests {
         showtype = showtypeRepository.saveAndFlush(showtype);
         Show show = new Show();
         show.setTitle("IU Consert");
+        show.setActor("NameActor");
+        show.setInformation("title has be test");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
@@ -142,6 +146,8 @@ public class ShowtimeTests {
         showtype = showtypeRepository.saveAndFlush(showtype);
         Show show = new Show();
         show.setTitle("IU Consert");
+        show.setActor("NameActor");
+        show.setInformation("title has be test");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
@@ -169,6 +175,34 @@ public class ShowtimeTests {
         //assertEquals("must match \"^([0-1][0-9]|2[0-3]).[0-5][0-9]-([0-1][0-9]|2[0-3]).[0-5][0-9]$\"", v.getMessage());
     }
 
+    @Test
+    void b60001537_testShowNotNull()throws Exception{//Location notnull
+        
+        Time time = new Time();
+        time.setTime("20.00-12.00");
+        time = timeRepository.saveAndFlush(time);
+        ShowLocation location = new ShowLocation();
+        location.setLocation("RCA");
+        location = showLocationRepository.saveAndFlush(location);
+        Showtime showtime = new Showtime();
+        showtime.setTime(time);
+        showtime.setShow(null);
+        showtime.setLocation(location);
+        String datetime = "2020-02-30";
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateT = df.parse(datetime);
+        showtime.setShowDate(dateT);
+        
+        Set<ConstraintViolation<Showtime>> result = validator.validate(showtime);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Showtime> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("show", v.getPropertyPath().toString());
+        
+        //assertEquals("must match \"^([0-1][0-9]|2[0-3]).[0-5][0-9]-([0-1][0-9]|2[0-3]).[0-5][0-9]$\"", v.getMessage());
+    }
 
     @Test
     void b60001537_testTimeNotNull()throws Exception{ //Time notnull
@@ -184,6 +218,8 @@ public class ShowtimeTests {
         showtype = showtypeRepository.saveAndFlush(showtype);
         Show show = new Show();
         show.setTitle("IU Consert");
+        show.setActor("NameActor");
+        show.setInformation("title has be test");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
@@ -210,14 +246,30 @@ public class ShowtimeTests {
         
         
     }
+
+
     @Test
-    void b60001537_testTimNotempty(){
+    void b60001537_testTimeSize(){//timeSize
         Time time = new Time();
-        time.setTime("");
+        time.setTime("10.00-12.0000");
         Set<ConstraintViolation<Time>> result = validator.validate(time);
         
         assertEquals(1, result.size());
         ConstraintViolation<Time> v = result.iterator().next();
+        assertEquals("size must be between 9 and 12", v.getMessage());
+
+    
+    }
+
+
+    @Test
+    void b60001537_testShowLocationNotEmpty(){//ShowLocationNotempty
+        ShowLocation location = new ShowLocation();
+        location.setLocation("");
+        Set<ConstraintViolation<ShowLocation>> result = validator.validate(location);
+        
+        assertEquals(1, result.size());
+        ConstraintViolation<ShowLocation> v = result.iterator().next();
         assertEquals("must not be empty", v.getMessage());
 
     

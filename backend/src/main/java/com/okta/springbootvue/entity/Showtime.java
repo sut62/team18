@@ -47,6 +47,7 @@ public class Showtime {
     @JoinColumn(name = "SHOWLOCATION_ID", insertable = true)
     private ShowLocation location;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Show.class)
     @JoinColumn(name = "SHOW_ID", insertable = true)
     private Show show;
