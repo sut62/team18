@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import java.util.Collection;
 
@@ -27,8 +29,12 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EMPLOYEE_SEQ")
     @Column(name="EMPLOYEE_ID",unique = true, nullable = true)
     private @NonNull Long id;
-    private @NonNull String name;
-    private @NonNull String password;
+
+    @NotNull
+    private  String name;
+
+    @NotNull
+    private  String password;
 
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -36,6 +42,10 @@ public class Employee {
 
     public void setName(String name) {
 		this.name = name;
+    }
+
+    public String getName() {
+		return this.name;
 	}
 
 	public void setPass(String pass) {
