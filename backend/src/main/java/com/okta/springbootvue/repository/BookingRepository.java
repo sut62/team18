@@ -1,8 +1,10 @@
 package com.okta.springbootvue.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.okta.springbootvue.entity.Booking;
+import com.okta.springbootvue.entity.UserRegister;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,6 +18,8 @@ public
 interface BookingRepository extends JpaRepository<Booking, Long> {
     Booking findById(long id);
     
+    List<Booking> findByChooseUser(UserRegister chooseUser);
+
     //change booked seat status 
     @Transactional
     @Modifying

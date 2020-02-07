@@ -29,9 +29,9 @@
                 id="cu_name"
                 label="เลือกชื่อลูกค้า"
                 solo
-                v-model="receipts.bookingId"
-                :items="bookings"
-                item-text="chooseUser.name"
+                v-model="selectUser"
+                :items="users"
+                item-text="name"
                 item-value="id"
                 :rules="[(v) => !!v || 'Item is required']"
                 required
@@ -46,13 +46,23 @@
                 id="booking"
                 label="เลือกตั๋วการแสดง"
                 solo
-                v-model="receipts.bookingId"
+                v-model="selectBook"
                 :items="bookings"
-                item-text="chooseShowtime.show.title"
+                
                 item-value="id"
                 :rules="[(v) => !!v || 'Item is required']"
                 required
-              ></v-select>
+              >
+              <template slot="item" slot-scope="data">
+                  {{ data.item.chooseShowtime.show.title }} -
+                  {{ data.item.chooseShowtime.time.time }} - {{ data.item.chooseSeat.seat_no }}
+                </template>
+
+                <template slot="selection" slot-scope="data">
+                  {{ data.item.chooseShowtime.show.title }} -
+                  {{ data.item.chooseShowtime.time.time }} - {{ data.item.chooseSeat.seat_no }}
+                </template>
+              </v-select>
             </v-col>
           </v-row>
 
@@ -88,6 +98,13 @@
 import http from "../http-common";
 
 export default {
+  watch: {
+    selectUser: function(val) {
+      this.bookings = [];
+      this.getBookings();
+    },
+  },
+
   name: "receipts",
   data() {
     return {
@@ -97,6 +114,9 @@ export default {
       },
       name: localStorage.getItem("sitePass"),
       bookings: [],
+      users: [],
+      selectBook: [],
+      selectUser: [],
       payments: []
     };
   },
@@ -127,7 +147,7 @@ export default {
 
     getBookings() {
       http
-        .get("/booking")
+        .get("/booking/" + this.selectUser)
         .then(response => {
           this.bookings = response.data;
           console.log(response.data);
@@ -137,13 +157,26 @@ export default {
         });
     },
 
+    getUsers() {
+      http
+        .get("/userregister")
+        .then(response => {
+          this.users = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+
     saveData() {
       http
         .post(
           "/receipts/" +
             localStorage.getItem("empid") +
             "/" +
-            this.receipts.bookingId +
+            this.selectBook +
             "/" +
             this.receipts.paymentId,
           this.receipts
@@ -175,7 +208,7 @@ export default {
     /* eslint-enable no-console */
   },
   mounted() {
-    this.getBookings();
+    this.getUsers();
     this.getEmployees();
     this.getPayments();
   }

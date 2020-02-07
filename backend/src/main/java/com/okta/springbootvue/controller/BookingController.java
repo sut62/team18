@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -44,6 +45,13 @@ public class BookingController {
     @GetMapping("/booking")
     public Collection<Booking> Bookings() {
         return bookingRepository.findAll().stream().collect(Collectors.toList());
+    }
+    // หาตั๋วที่ลูกค้าจองไว้
+    @GetMapping("/booking/{user_id}")
+    public List<Booking> getBookingWhereUser(@PathVariable long user_id) {
+        UserRegister user = userRepository.findById(user_id);
+        List<Booking> bookings = bookingRepository.findByChooseUser(user);
+        return bookings;
     }
 
     // check seat

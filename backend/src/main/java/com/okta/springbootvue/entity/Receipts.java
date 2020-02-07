@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 //import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -49,7 +50,7 @@ public class Receipts {
         private Payment payment;
 
         @NotNull
-        @ManyToOne(fetch = FetchType.EAGER, targetEntity = Booking.class)
+        @OneToOne(fetch = FetchType.EAGER, targetEntity = Booking.class)
         @JoinColumn(name = "BOOKING_ID", insertable = true)
         private Booking booking;
 
