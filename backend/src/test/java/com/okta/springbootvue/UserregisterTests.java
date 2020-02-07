@@ -56,7 +56,7 @@ public class UserregisterTests {
         Question question = new Question();
         TypeName typename = new TypeName();
         UserRegister userregister = new UserRegister();
-        userregister.setName("Kittichai Jitjaroen");
+        userregister.setName("กิตติชัย");
         userregister.setTel("0901316436");
         userregister.setEmail("mosmos11289@gmail.com");
         userregister.setAnswer("Chanthaburi");
@@ -133,7 +133,7 @@ public class UserregisterTests {
 
         // error message ตรงชนิด และถูก field
         final ConstraintViolation<UserRegister> v = result.iterator().next();
-        assertEquals("must match \"^[A-Za-z ]{1,60}$\"", v.getMessage());
+        assertEquals("must match \"^[A-Za-zก-๙ ]{4,60}$\"", v.getMessage());
         assertEquals("name", v.getPropertyPath().toString());
     }
 
@@ -162,7 +162,7 @@ public class UserregisterTests {
 
         // error message ตรงชนิด และถูก field
         final ConstraintViolation<UserRegister> v = result.iterator().next();
-        assertEquals("must match \"^[A-Za-z ]{1,60}$\"", v.getMessage());
+        assertEquals("must match \"^[A-Za-zก-๙ ]{4,60}$\"", v.getMessage());
         assertEquals("name", v.getPropertyPath().toString());
     }
 

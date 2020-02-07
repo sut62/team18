@@ -36,8 +36,9 @@ public class UserRegister {
     @Column(name="DATE")
     private @NonNull Date date;
 
+    
     @NotNull
-    @Pattern(regexp= "^[A-Za-z ]{1,60}$")
+    @Pattern(regexp = "^[A-Za-zก-๙ ]{4,60}$")
     @Column(name="NAME")
     private @NonNull String name;
 
