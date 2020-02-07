@@ -11,18 +11,14 @@
             <v-row justify="center" style = "height: 65px;">
             <!-- ชื่อพนักงาน -->
               <v-col cols="3">
-                <v-select
-                  id = "emp_name"
-                  label="เลือกชื่อพนักงาน"
-                  solo
-                  v-model="show.employeeId"
-                  :items="employees"
-                  item-text="name"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'Item is required']"
-                  required
-                  prepend-icon="mdi-account"
-                ></v-select>
+                <v-text-field
+                solo
+                id="emp_name"
+                label="ชื่อพนักงาน"
+                v-model="name"
+                readonly
+                prepend-icon="mdi-account"
+                ></v-text-field>
               </v-col>
               </v-row>
 
@@ -131,14 +127,13 @@ export default {
   data() {
     return {
       show: {
-        employeeId: "",
         ratingshowId: "",
         showtypeId: "",
       },
         actor : "",
         title : "",
         information : "",
-        employees : "",
+        name: localStorage.getItem("sitePass"),
         ratingshows : "",
         showtypes : "",
     };
@@ -191,7 +186,7 @@ export default {
           "/show/" +
             this.actor +
             "/" +
-            this.show.employeeId +
+            localStorage.getItem("empid") +
             "/" +
             this.information +
             "/" +
@@ -239,4 +234,5 @@ export default {
   }
 };
 </script>
+
 
