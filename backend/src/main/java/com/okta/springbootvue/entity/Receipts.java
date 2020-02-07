@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 //import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -20,6 +19,8 @@ import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -67,5 +68,25 @@ public class Receipts {
         public void setReceiptsDatetime(LocalDateTime receipts_datetime) {
                 this.receipts_datetime =receipts_datetime;
         }
+
+        public Long getId() {
+	        return id;
+	}
+
+	public LocalDateTime getReceiptsDatetime() {
+                return receipts_datetime;
+	}
+
+	public Employee getCreatedBy() {
+		return employee;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public Booking getBooking() {
+		return booking;
+	}
 
 }

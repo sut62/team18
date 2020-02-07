@@ -39,13 +39,4 @@ public class Payment {
 	public void setName(String name) {
         this.type = name;
 	}
-
-	public Object getName() {
-		return this.type;
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
 }
