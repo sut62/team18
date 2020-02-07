@@ -1,9 +1,11 @@
 package com.okta.springbootvue.entity;
+
 import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ public class Time {
     @Column(name="TIME_ID",unique = true, nullable = true)
     private @NonNull Long id;
 
-    @NotEmpty
+    @Size(min = 9,max = 12)
     @Column(name = "TIME")
     private String time;
 
