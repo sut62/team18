@@ -1,10 +1,23 @@
 <template>
   <v-content>
-    <v-card-text
-      headline
-      align="center"
-      class="display-2 font--weight-bold blue darken-3 yellow--text text--lighten-1"
-    >View User History</v-card-text>
+     <v-col justify="center">
+           <v-toolbar flat="" class="blue darken-3 yellow--text " >
+        <h1>User History</h1> &nbsp;&nbsp;&nbsp;&nbsp;<span>Data : </span> 
+        &nbsp;
+        <div v-if="this.status">
+        <span>have data</span>
+        </div>
+        &nbsp;
+        <div v-if="this.status==false">
+        <span>no data</span>
+        </div>
+       </v-toolbar> 
+        <v-data-table :headers="headers" 
+        :items="itemsz" :items-per-page="5" class="elevation-1">
+        </v-data-table> 
+
+  >
+  </v-col>
     <v-container>
       <v-layout text-center wrap>
         <v-flex mb-4></v-flex>
@@ -12,8 +25,7 @@
 
       <v-row justify="center">
       <v-col cols="20">
-        <v-data-table :headers="headers" :items="items" :items-per-page="5" class="elevation-1">
-        </v-data-table>
+       
       </v-col>
     </v-row>
 
@@ -48,7 +60,8 @@ export default {
          { text: "Date", value: "date" },
        
       ],
-      items: [],
+      itemsz: [],
+      status :true
       
     };
   },
@@ -59,8 +72,11 @@ export default {
       http
         .get("/userregister")
         .then(response => {
-          this.items = response.data;
-          console.log(this.items);
+          this.itemsz = response.data;
+          console.log(this.itemsz);
+          if(this.itemsz==""){
+          this.status=false;
+        }
         })
         .catch(e => {
           console.log(e);
