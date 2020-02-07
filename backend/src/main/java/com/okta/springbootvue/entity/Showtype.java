@@ -40,7 +40,7 @@ public class Showtype {
 		this.shname = name;
 	}
 
-	public Object getName() {
+	public String getName() {
 		return this.shname;
 	}
 
