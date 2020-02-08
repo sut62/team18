@@ -47,24 +47,20 @@ public class ShowTests {
 
     @Test
     void B6015800_testInsertDataOK() { // ใส่ข้อมูลถูกต้องปกติ
+
+        Employee employee = employeeRepository.findById(1);
+        
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
+
         Show show = new Show();
         show.setTitle("Frozen");
         show.setActor("Elsa");
         show.setInformation("ผจญภัยดินแดนหิมะ");
-        show = showRepository.saveAndFlush(show);
-
-        Employee employee = new Employee();
-        employee.setName("peter");
-        employee.setPass("1234");
-        employee = employeeRepository.saveAndFlush(employee);
-        
-        Ratingshow ratingshow = new Ratingshow();
-        ratingshow.setRate("ทุกวัย");
-        ratingshow = ratingshowRepository.saveAndFlush(ratingshow);
-       
-        Showtype showtype = new Showtype();
-        showtype.setShname("ตลก");
-        showtype = showtypeRepository.saveAndFlush(showtype);
+        show.setEmployee(employee);
+        show.setShowtype(showtype);
+        show.setRatingshow(ratingshow);
         
         show = showRepository.saveAndFlush(show);
 
@@ -74,127 +70,232 @@ public class ShowTests {
     }
 
     @Test
-    void B6015800_testShowtypeMustBeNotNull() { // Showtype ห้ามว่าง
+    void B6015800_testActorMustBeNotNull() { 
+        Employee employee = employeeRepository.findById(1);
+        
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
+
+        Show show = new Show();
+        show.setTitle("Frozen");
+        show.setActor(null);
+        show.setInformation("ผจญภัยดินแดนหิมะ");
+        show.setEmployee(employee);
+        show.setShowtype(showtype);
+        show.setRatingshow(ratingshow);
+
+        Set<ConstraintViolation<Show>> result = validator.validate(show);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Show> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("actor", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6015800_testTitleMustBeNotNull() { 
+        Employee employee = employeeRepository.findById(1);
+        
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
+
+        Show show = new Show();
+        show.setTitle(null);
+        show.setActor("Elsa");
+        show.setInformation("ผจญภัยดินแดนหิมะ");
+        show.setEmployee(employee);
+        show.setShowtype(showtype);
+        show.setRatingshow(ratingshow);
+
+        Set<ConstraintViolation<Show>> result = validator.validate(show);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Show> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("title", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6015800_testInformationMustBeNotNull() { 
+        Employee employee = employeeRepository.findById(1);
+        
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
+
+        Show show = new Show();
+        show.setTitle("Frozen");
+        show.setActor("Elsa");
+        show.setInformation(null);
+        show.setEmployee(employee);
+        show.setShowtype(showtype);
+        show.setRatingshow(ratingshow);
+
+        Set<ConstraintViolation<Show>> result = validator.validate(show);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Show> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("information", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6015800_testEmployeeMustBeNotNull() { // Showtype ห้ามว่าง
+        Employee employee = employeeRepository.findById(1);
+        
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
+
         Show show = new Show();
         show.setTitle("Frozen");
         show.setActor("Elsa");
         show.setInformation("ผจญภัยดินแดนหิมะ");
-        show = showRepository.saveAndFlush(show);
+        show.setEmployee(null);
+        show.setShowtype(showtype);
+        show.setRatingshow(ratingshow);
 
-        Employee employee = new Employee();
-        employee.setName("peter");
-        employee.setPass("1234");
-        employee = employeeRepository.saveAndFlush(employee);
+        Set<ConstraintViolation<Show>> result = validator.validate(show);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Show> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("employee", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6015800_testShowTypeMustBeNotNull() { // Showtype ห้ามว่าง
+        Employee employee = employeeRepository.findById(1);
         
-        Ratingshow ratingshow = new Ratingshow();
-        ratingshow.setRate("ทุกวัย");
-        ratingshow = ratingshowRepository.saveAndFlush(ratingshow);
-       
-        Showtype showtype = new Showtype();
-        showtype.setShname(null);
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
 
+        Show show = new Show();
+        show.setTitle("Frozen");
+        show.setActor("Elsa");
+        show.setInformation("ผจญภัยดินแดนหิมะ");
+        show.setEmployee(employee);
+        show.setShowtype(null);
+        show.setRatingshow(ratingshow);
+
+        Set<ConstraintViolation<Show>> result = validator.validate(show);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Show> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("showtype", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6015800_testRatingShowMustBeNotNull() { // Showtype ห้ามว่าง
+        Employee employee = employeeRepository.findById(1);
+        
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
+
+        Show show = new Show();
+        show.setTitle("Frozen");
+        show.setActor("Elsa");
+        show.setInformation("ผจญภัยดินแดนหิมะ");
+        show.setEmployee(employee);
+        show.setShowtype(showtype);
+        show.setRatingshow(null);
+
+        Set<ConstraintViolation<Show>> result = validator.validate(show);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Show> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("ratingshow", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6015800_testShowTypeMustBeNotEmpty() { // Employee ห้ามว่าง
+        Showtype showtype = new Showtype();
+        showtype.setShname("");
+    
         Set<ConstraintViolation<Showtype>> result = validator.validate(showtype);
 
         assertEquals(1, result.size());
 
         ConstraintViolation<Showtype> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
+        assertEquals("must not be empty", v.getMessage());
         assertEquals("shname", v.getPropertyPath().toString());
     }
 
     @Test
-    void B6015800_testEmployeeMustBeNotNull() { // Employee ห้ามว่าง
-        Show show = new Show();
-        show.setTitle("Frozen");
-        show.setActor("Elsa");
-        show.setInformation("ผจญภัยดินแดนหิมะ");
-        show = showRepository.saveAndFlush(show);
-
-        Employee employee = new Employee();
-        employee.setName(null);
-        employee.setPass("1234");
-        
-        
+    void B6015800_testRatingShowMustBeNotEmpty() { // Employee ห้ามว่าง
         Ratingshow ratingshow = new Ratingshow();
-        ratingshow.setRate("ทุกวัย");
-        ratingshow = ratingshowRepository.saveAndFlush(ratingshow);
-       
-        Showtype showtype = new Showtype();
-        showtype.setShname("ตลก");
-        showtype = showtypeRepository.saveAndFlush(showtype);
-       
-        Set<ConstraintViolation<Employee>> result = validator.validate(employee);
-
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Employee> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
-        assertEquals("name", v.getPropertyPath().toString());
-    }
-
-    @Test
-    void B6015800_testRatingshowMustBeNotNull() { // Ratingshow ห้ามว่าง
-        Show show = new Show();
-        show.setTitle("Frozen");
-        show.setActor("Elsa");
-        show.setInformation("ผจญภัยดินแดนหิมะ");
-        show = showRepository.saveAndFlush(show);
-
-        Employee employee = new Employee();
-        employee.setName("peter");
-        employee.setPass("1234");
-        
-        
-        Ratingshow ratingshow = new Ratingshow();
-        ratingshow.setRate(null);
-       
-        Showtype showtype = new Showtype();
-        showtype.setShname("ตลก");
-        showtype = showtypeRepository.saveAndFlush(showtype);
-
+        ratingshow.setRate("");
+    
         Set<ConstraintViolation<Ratingshow>> result = validator.validate(ratingshow);
 
         assertEquals(1, result.size());
 
         ConstraintViolation<Ratingshow> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
+        assertEquals("must not be empty", v.getMessage());
         assertEquals("rate", v.getPropertyPath().toString());
     }
 
     @Test
-    void B6015800_testShowtypeMustBeGreaterEqual3() {
-        Showtype showtype = new Showtype();
-        showtype.setShname("12");
-
-        Set<ConstraintViolation<Showtype>> result = validator.validate(showtype);
-
-        assertEquals(1, result.size());
-
-        assertEquals("size must be between 3 and 9", result.iterator().next().getMessage());
-        assertEquals("shname", result.iterator().next().getPropertyPath().toString());
-    }
-
-    @Test
-    void B6015800_testShowtypeMustBeLessEqual9() {
-        Showtype showtype = new Showtype();
-        showtype.setShname("1234567890");
-
-        Set<ConstraintViolation<Showtype>> result = validator.validate(showtype);
-
-        assertEquals(1, result.size());
-
-        assertEquals("size must be between 3 and 9", result.iterator().next().getMessage());
-        assertEquals("shname", result.iterator().next().getPropertyPath().toString());
-    }
-
-    @Test
-    void B6015800_testTitleNotempty(){
-        Show show = new Show();
-        show.setTitle("");
-        Set<ConstraintViolation<Show>> result = validator.validate(show);
+    void B6015800_testActorMustBeGreaterEqual3() {
+        Employee employee = employeeRepository.findById(1);
         
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
+
+        Show show = new Show();
+        show.setTitle("Frozen");
+        show.setActor("El");
+        show.setInformation("ผจญภัยดินแดนหิมะ");
+        show.setEmployee(employee);
+        show.setShowtype(showtype);
+        show.setRatingshow(ratingshow);
+        
+        Set<ConstraintViolation<Show>> result = validator.validate(show);
+
         assertEquals(1, result.size());
+
         ConstraintViolation<Show> v = result.iterator().next();
-        assertEquals("must not be empty", v.getMessage());
+        assertEquals("size must be between 3 and 50", v.getMessage());
+        assertEquals("actor", v.getPropertyPath().toString());
     }
+
+    @Test
+    void B6015800_testActorMustBeLessThanEqual50() {
+        Employee employee = employeeRepository.findById(1);
+        
+        Ratingshow ratingshow = ratingshowRepository.findById(1);
+        
+        Showtype showtype = showtypeRepository.findById(1);
+
+        Show show = new Show();
+        show.setTitle("Frozen");
+        show.setActor("zasqwaeadsfdrfgftvhvygjbunmjkmijokl,oklm,jkuiyuhjgjgjgrojgrogj");
+        show.setInformation("ผจญภัยดินแดนหิมะ");
+        show.setEmployee(employee);
+        show.setShowtype(showtype);
+        show.setRatingshow(ratingshow);
+        
+        Set<ConstraintViolation<Show>> result = validator.validate(show);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Show> v = result.iterator().next();
+        assertEquals("size must be between 3 and 50", v.getMessage());
+        assertEquals("actor", v.getPropertyPath().toString());
+    }
+
+    
 }
