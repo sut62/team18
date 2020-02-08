@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
 
 import java.util.Collection;
 
@@ -30,7 +30,7 @@ public class Payment {
     private @NonNull Long id;
 
     @NotNull
-    @Size(min = 10, max = 24)
+    @NotEmpty
     private String type;
 
     //@OneToMany(fetch = FetchType.EAGER)

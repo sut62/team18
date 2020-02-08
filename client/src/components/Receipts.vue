@@ -83,11 +83,24 @@
             </v-col>
           </v-row>
 
-          <v-row justify="center" style="height: 45px;">
-            <v-col cols="12">
-              <v-btn color="red" style="margin-left: 45%;" @click="saveData">save</v-btn>
-            </v-col>
+          <v-row justify="center" style="height: 70px;">
+            <!-- กรอกหมายเหตุ -->
+            <v-col cols="3">
+              <v-textarea
+                id = "show_list"
+                solo
+                label="หมายเหตุ"
+                v-model= "note"
+                :rules="[(v) => !!v || 'This field is required']"
+                required
+              ></v-textarea>
+            </v-col>    
           </v-row>
+
+          <br><br><br><br>
+            <v-col cols="12">
+              <v-btn color="red" style="margin-left: 47%;" @click="saveData">save</v-btn>
+            </v-col>
         </v-form>
       </v-col>
     </v-row>
@@ -117,7 +130,8 @@ export default {
       users: [],
       selectBook: [],
       selectUser: [],
-      payments: []
+      payments: [],
+      note: ""
     };
   },
   methods: {
@@ -178,7 +192,9 @@ export default {
             "/" +
             this.selectBook +
             "/" +
-            this.receipts.paymentId,
+            this.receipts.paymentId +
+            "/" +
+            this.note,
           this.receipts
         )
         .then(response => {

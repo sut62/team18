@@ -22,6 +22,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -38,6 +40,12 @@ public class Receipts {
         @NotNull
         @Column(name = "RECEIPTS_DATETIME")
         private LocalDateTime receipts_datetime;
+
+        @NotNull
+        @Size(min = 1, max = 99)
+        @Pattern(regexp = "^[ก-๏\\-]+$")
+        @Column(name = "NOTE")
+        private String note;
 
         @NotNull
         @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
@@ -66,28 +74,16 @@ public class Receipts {
                 this.booking = booking;
         }
 
-        public void setReceiptsDatetime(LocalDateTime receipts_datetime) {
-                this.receipts_datetime =receipts_datetime;
+        public void setReceiptsDatetime(LocalDateTime now) {
+                this.receipts_datetime = now;
+        }
+
+        public void setNote(String note) {
+                this.note = note;
         }
 
         public Long getId() {
 	        return id;
-	}
-
-	public LocalDateTime getReceiptsDatetime() {
-                return receipts_datetime;
-	}
-
-	public Employee getCreatedBy() {
-		return employee;
-	}
-
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public Booking getBooking() {
-		return booking;
 	}
 
 }

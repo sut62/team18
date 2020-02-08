@@ -41,8 +41,9 @@ public class ReceiptsController {
         return receiptsRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/receipts/{employee_id}/{booking_id}/{payment_id}")
-    public Receipts newReceipts(Receipts newReceipts, @PathVariable long employee_id,  @PathVariable long booking_id, @PathVariable long payment_id) {
+    @PostMapping("/receipts/{employee_id}/{booking_id}/{payment_id}/{note}")
+    public Receipts newReceipts(Receipts newReceipts, @PathVariable long employee_id,  
+    @PathVariable long booking_id, @PathVariable long payment_id, @PathVariable String note) {
         
     Employee employee = employeeRepository.findById(employee_id);	
     Booking booking = bookingRepository.findById(booking_id);
@@ -56,6 +57,7 @@ public class ReceiptsController {
     newReceipts.setBooking(booking);
     newReceipts.setPayment(payment);
     newReceipts.setReceiptsDatetime(receipts_datetime);
+    newReceipts.setNote(note);
 
     return receiptsRepository.save(newReceipts); 
     }
