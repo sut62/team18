@@ -14,6 +14,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -25,26 +29,30 @@ public class Show {
     @Column(name="SHOW_ID",unique = true, nullable = true)
     private @NonNull Long id;
 
+    @NotNull
+    @Size(min = 3, max = 50)
     @Column(name="Actor")
     private String actor;
     
-    @NotEmpty
+    @NotNull
     @Column(name="Title")
     private String title;
 
+    @NotNull
     @Column(name="Information")
     private String information;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
     private Employee employee;
 
-    
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Ratingshow.class)
     @JoinColumn(name = "RATINGSHOW_ID", insertable = true)
     private Ratingshow ratingshow;
 
-    
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Showtype.class)
     @JoinColumn(name = "SHOWTYPE_ID", insertable = true)
     private Showtype showtype;
