@@ -61,7 +61,8 @@ public class CancelBookingTests {
     private ShowRepository showRepository;
     @Autowired
     private ShowLocationRepository showLocationRepository;
-    
+    @Autowired
+    private CancelReasonRepository cancelReasonRepository;
 
     @BeforeEach
     public void setup() {
@@ -145,6 +146,9 @@ public class CancelBookingTests {
         cancelbook.setCancelBook(booking);
         //set user
         cancelbook.setCancelBy(userregister);
+        //set reason
+        CancelReason cancelreason = cancelReasonRepository.findById(1);
+        cancelbook.setCancelCaused(cancelreason);
         // บันทึกค่า
         cancelbook = cancelBookingRepository.saveAndFlush(cancelbook);
         // เทียบค่าที่บันทึก กับค่าที่ส่งไป
@@ -229,6 +233,9 @@ public class CancelBookingTests {
         cancelbook.setCancelBook(booking);
         //set user
         cancelbook.setCancelBy(userregister);
+        //set reason
+        CancelReason cancelreason = cancelReasonRepository.findById(1);
+        cancelbook.setCancelCaused(cancelreason);
         // เปรียบเทียบไซส์
         Set<ConstraintViolation<CancelBooking>> result = validator.validate(cancelbook);
         assertEquals(1, result.size());
@@ -314,6 +321,9 @@ public class CancelBookingTests {
         cancelbook.setCancelBook(booking);
         //set user
         cancelbook.setCancelBy(userregister);
+        //set reason
+        CancelReason cancelreason = cancelReasonRepository.findById(1);
+        cancelbook.setCancelCaused(cancelreason);
         // เทียบค่าที่บันทึก
         Set<ConstraintViolation<CancelBooking>> result = validator.validate(cancelbook);
         assertEquals(1, result.size());
@@ -400,6 +410,9 @@ public class CancelBookingTests {
         cancelbook.setCancelBook(booking);
         //set user
         cancelbook.setCancelBy(userregister);
+        //set reason
+        CancelReason cancelreason = cancelReasonRepository.findById(1);
+        cancelbook.setCancelCaused(cancelreason);
         // เทียบค่าที่บันทึก
         Set<ConstraintViolation<CancelBooking>> result = validator.validate(cancelbook);
         assertEquals(1, result.size());
@@ -485,6 +498,9 @@ public class CancelBookingTests {
         cancelbook.setCancelBook(booking);
         //set user
         cancelbook.setCancelBy(userregister);
+        //set reason
+        CancelReason cancelreason = cancelReasonRepository.findById(1);
+        cancelbook.setCancelCaused(cancelreason);
         // เทียบค่า
         Set<ConstraintViolation<CancelBooking>> result = validator.validate(cancelbook);
         assertEquals(1, result.size());
@@ -570,6 +586,9 @@ public class CancelBookingTests {
         cancelBook.setCancelBook(booking);
         //set user
         cancelBook.setCancelBy(userregister);
+        //set reason
+        CancelReason cancelreason = cancelReasonRepository.findById(1);
+        cancelBook.setCancelCaused(cancelreason);
         // ตรวจสอบ error และเก็บค่า error ในรูปแบบ set
         Set<ConstraintViolation<CancelBooking>> result = validator.validate(cancelBook);
         // result ต้องมี error 1 ค่าเท่านั้น
