@@ -7,7 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import java.util.Collection;
 
@@ -27,7 +29,9 @@ public class Ratingshow {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="RATINGSHOW_SEQ")
     @Column(name="RATINGSHOW_ID",unique = true, nullable = true)
     private @NonNull Long id;
+
     @NotNull
+	  @NotEmpty
     private String rate;
 
     //@OneToMany(fetch = FetchType.EAGER)
