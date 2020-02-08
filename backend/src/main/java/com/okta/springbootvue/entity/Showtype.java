@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import java.util.Collection;
@@ -30,7 +31,7 @@ public class Showtype {
 	private @NonNull Long id;
 
 	@NotNull
-    @Size(min = 3, max = 9)
+	@NotEmpty
 	private String shname;
 	
 	//@OneToMany(fetch = FetchType.EAGER)
