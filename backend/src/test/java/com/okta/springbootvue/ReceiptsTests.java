@@ -376,7 +376,7 @@ public class ReceiptsTests {
 
         ///////////////////////paymentType ห้ามเป็น empty /////////////////////////////////
     @Test
-    void B6015886_testPaymentMustNotBeEmpty() throws ParseException { 
+    void B6015886_testPaymentTypeMustNotBeEmpty() throws ParseException { 
 
         Payment payment = new Payment();
         payment.setName("");
