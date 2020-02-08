@@ -87,6 +87,8 @@ public class BookingTests {
         Showtype showtype = showtypeRepository.findById(1);
         Show show = new Show();
         show.setTitle("IU Concert");
+        show.setActor("Lee Ji eun");
+        show.setInformation("just example show");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
@@ -309,6 +311,8 @@ public class BookingTests {
         Showtype showtype = showtypeRepository.findById(1);
         Show show = new Show();
         show.setTitle("IU Concert");
+        show.setActor("Lee Ji eun");
+        show.setInformation("just example show");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
@@ -378,6 +382,8 @@ public class BookingTests {
         Showtype showtype = showtypeRepository.findById(1);
         Show show = new Show();
         show.setTitle("IU Concert");
+        show.setActor("Lee Ji eun");
+        show.setInformation("just example show");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
@@ -437,6 +443,8 @@ public class BookingTests {
         Showtype showtype = showtypeRepository.findById(1);
         Show show = new Show();
         show.setTitle("IU Concert");
+        show.setActor("Lee Ji eun");
+        show.setInformation("just example show");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
@@ -506,6 +514,8 @@ public class BookingTests {
         Showtype showtype = showtypeRepository.findById(1);
         Show show = new Show();
         show.setTitle("IU Concert");
+        show.setActor("Lee Ji eun");
+        show.setInformation("just example show");
         show.setEmployee(employee);
         show.setRatingshow(ratingshow);
         show.setShowtype(showtype);
