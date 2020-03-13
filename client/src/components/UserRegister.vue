@@ -272,13 +272,15 @@ export default {
   },
   methods: {
     checkPass(){
-      if(this.password.length<8){
+      if(this.password.length<8||this.repassword.length<8||this.password!=this.repassword){
       this.statuss = null;
       
       }else{
         this.statuss = true;
         this.saveData();
+        window.location.reload();
       }
+      
     },
 
     // ดึงข้อมูล NameTppe ใส่ combobox
