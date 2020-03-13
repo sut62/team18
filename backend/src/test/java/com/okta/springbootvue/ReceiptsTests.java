@@ -110,7 +110,7 @@ public class ReceiptsTests {
         showtime.setTime(time);
         showtime.setShow(show);
         showtime.setLocation(location);
-        String datetime = "2020-02-30";
+        String datetime = "2020-10-30";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dateT = df.parse(datetime);
         showtime.setShowDate(dateT);
@@ -182,7 +182,7 @@ public class ReceiptsTests {
         showtime.setTime(time);
         showtime.setShow(show);
         showtime.setLocation(location);
-        String datetime = "2020-02-30";
+        String datetime = "2020-10-30";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dateT = df.parse(datetime);
         showtime.setShowDate(dateT);
@@ -258,7 +258,7 @@ public class ReceiptsTests {
         showtime.setTime(time);
         showtime.setShow(show);
         showtime.setLocation(location);
-        String datetime = "2020-02-30";
+        String datetime = "2020-10-30";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dateT = df.parse(datetime);
         showtime.setShowDate(dateT);
@@ -333,7 +333,7 @@ public class ReceiptsTests {
         showtime.setTime(time);
         showtime.setShow(show);
         showtime.setLocation(location);
-        String datetime = "2020-02-30";
+        String datetime = "2020-10-30";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dateT = df.parse(datetime);
         showtime.setShowDate(dateT);
@@ -426,7 +426,7 @@ public class ReceiptsTests {
         showtime.setTime(time);
         showtime.setShow(show);
         showtime.setLocation(location);
-        String datetime = "2020-02-30";
+        String datetime = "2020-10-30";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dateT = df.parse(datetime);
         showtime.setShowDate(dateT);
@@ -501,7 +501,7 @@ public class ReceiptsTests {
         showtime.setTime(time);
         showtime.setShow(show);
         showtime.setLocation(location);
-        String datetime = "2020-02-30";
+        String datetime = "2020-10-30";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dateT = df.parse(datetime);
         showtime.setShowDate(dateT);
@@ -576,7 +576,7 @@ public class ReceiptsTests {
         showtime.setTime(time);
         showtime.setShow(show);
         showtime.setLocation(location);
-        String datetime = "2020-02-30";
+        String datetime = "2020-10-30";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dateT = df.parse(datetime);
         showtime.setShowDate(dateT);
@@ -651,7 +651,7 @@ public class ReceiptsTests {
         showtime.setTime(time);
         showtime.setShow(show);
         showtime.setLocation(location);
-        String datetime = "2020-02-30";
+        String datetime = "2020-10-30";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date dateT = df.parse(datetime);
         showtime.setShowDate(dateT);
