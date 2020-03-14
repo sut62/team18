@@ -4,6 +4,7 @@ import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.lang.Nullable;
 
@@ -26,7 +27,8 @@ public class CancelReason {
     @Column(name="CANCELREASON_ID",unique = true, nullable = true)
     private @NonNull Long id;
 
-    private @NonNull String reason;
+    @NotNull
+    private String reason;
 
 	public void setReason(String name) {
         this.reason = name;
