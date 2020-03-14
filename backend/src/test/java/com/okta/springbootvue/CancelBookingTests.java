@@ -611,5 +611,18 @@ public class CancelBookingTests {
         assertEquals("date", v.getPropertyPath().toString());
     }
 
+    @Test
+    void b60001537_testCancelReasonNotBeNull(){
+        CancelReason cr = new CancelReason();
+        cr.setReason(null);
+        Set<ConstraintViolation<CancelReason>> result = validator.validate(cr);
+        
+        assertEquals(1, result.size());
+        ConstraintViolation<CancelReason> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+
+    
+    }
+
 
 }
