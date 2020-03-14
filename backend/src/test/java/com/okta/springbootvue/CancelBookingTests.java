@@ -612,8 +612,4 @@ public class CancelBookingTests {
     }
 
 
-
-
-
-
 }
