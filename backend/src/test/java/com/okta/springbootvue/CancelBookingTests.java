@@ -612,7 +612,7 @@ public class CancelBookingTests {
     }
 
     @Test
-    void b60001537_testCancelReasonNotBeNull(){
+    void B6004408_testCancelReasonNotBeNull(){
         CancelReason cr = new CancelReason();
         cr.setReason(null);
         Set<ConstraintViolation<CancelReason>> result = validator.validate(cr);
