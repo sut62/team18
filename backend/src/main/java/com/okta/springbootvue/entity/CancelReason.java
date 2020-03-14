@@ -30,6 +30,15 @@ public class CancelReason {
     @NotNull
     private String reason;
 
+
+
+
+
+
+
+
+
+    
 	public void setReason(String name) {
         this.reason = name;
 	}
