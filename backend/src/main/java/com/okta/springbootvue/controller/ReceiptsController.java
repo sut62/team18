@@ -20,7 +20,7 @@ import com.okta.springbootvue.repository.EmployeeRepository;
 import com.okta.springbootvue.repository.BookingRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:8082")
+@CrossOrigin(origins = "172.17.0.202:8082")
 @RestController
 public class ReceiptsController {
     @Autowired

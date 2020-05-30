@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:8082")
+@CrossOrigin(origins = "172.17.0.202:8082")
 @RestController
 public class QuestionController {
  @Autowired
