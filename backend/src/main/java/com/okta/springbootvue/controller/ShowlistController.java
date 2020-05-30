@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "172.17.0.202:8082")
+@CrossOrigin(origins = "172.17.0.201:8082")
 @RestController
 public class ShowlistController {
     @Autowired

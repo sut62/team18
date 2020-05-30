@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "172.17.0.202:8082")
+@CrossOrigin(origins = "172.17.0.201:8082")
 @RestController
 public class SearchReceiptsController {
     @Autowired

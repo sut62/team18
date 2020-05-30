@@ -14,7 +14,7 @@ import com.okta.springbootvue.repository.ZoneRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "172.17.0.202:8082")
+@CrossOrigin(origins = "172.17.0.201:8082")
 @RestController
 public class ZoneController {
 
