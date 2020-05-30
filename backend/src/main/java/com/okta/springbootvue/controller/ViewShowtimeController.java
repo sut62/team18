@@ -9,7 +9,7 @@ import com.okta.springbootvue.entity.Showtime;
 import com.okta.springbootvue.repository.ShowtimeRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "172.17.0.201:8082")
+@CrossOrigin(origins = "172.17.0.200:8082")
 @RestController
 public class ViewShowtimeController {
     @Autowired
