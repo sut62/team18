@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "172.17.0.200:8082")
+
 @RestController
 public class ShowlistController {
     @Autowired

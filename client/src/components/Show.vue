@@ -186,7 +186,7 @@ export default {
           "/show/" +
             this.actor +
             "/" +
-            localStorage.getItem("empid") +
+            1 +
             "/" +
             this.information +
             "/" +
